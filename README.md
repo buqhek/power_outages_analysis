@@ -65,7 +65,7 @@ These two new features are added to my working list of features from the outages
 
 To start, I decided to investigate the outage durations on a monthly and yearly basis. Below is a table containing the total number of minutes in outage duration from each month between 2000-2016, with the total duration of outages summed to in the right-most column:
 
-Below is a table containing the **total sum of power outage durations (in hours) on a "per month per year" basis**:
+Below is a table containing the **TOTAL duration of power outages on a "per month per year" basis (in hours)**:
 
 |   Year |     Jan |    Feb |     Mar |    April |   May |     June |    July |     Aug |    Sept |     Oct |    Nov |   Dec | 
 |-------:|--------:|--------:|--------:|-------:|-------:|--------:|--------:|--------:|--------:|--------:|-------:|--------:|
@@ -87,14 +87,14 @@ Below is a table containing the **total sum of power outage durations (in hours)
 |   2015 |   17.13 |   74.17 |   31.98 | 167.07 | 159.93 |  424.23 |  137.53 |  308.08 |    7.1  |   99.4  | 125.08 |  101.55 |
 |   2016 |   35.3  |   35.37 |  941.55 | 106.57 | 446.98 |    0.28 |    0    |    0    |    0    |    0    |   0    |    0    |
 
-Here is an additional table showing the **average duration of power outages of each month (in hours)**:
+Here is an additional table showing the **AVERAGE duration of power outages of each month (in hours)**:
 
 |     Jan |    Feb |     Mar |    April |   May |     June |    July |     Aug |    Sept |     Oct |    Nov |   Dec |
 |--------:|--------:|--------:|--------:|--------:|--------:|--------:|--------:|--------:|--------:|--------:|--------:|
 | 56.4658 | 41.6191 | 54.4316 | 24.8977 | 34.6216 | 32.4734 | 38.5983 | 40.4746 | 71.5754 | 60.0156 | 28.8027 | 54.8965 |
 
 
-And the **total duration of outages each year (in hours)**:
+And the **TOTAL duration of outages each year (in hours)**:
 
 |   2000 |    2001 |    2002 |    2003 |    2004 |    2005 |    2006 |   2007 |   2008 |    2009 |    2010 |   2011 |    2012 |    2013 |    2014 |    2015 |    2016 |
 |-------:|--------:|--------:|--------:|--------:|--------:|--------:|-------:|-------:|--------:|--------:|-------:|--------:|--------:|--------:|--------:|--------:|
@@ -105,7 +105,7 @@ These tables allow us to look and identify any trends in the outages from the en
 Below is a histogram showing the distribution of power outages on a monthly basis - a similar collection of data as our tables from earlier, but this time a bit more visual.
 
  <iframe
-    src="assets/hist.html"
+    src="assets/htmls/hist.html"
     width="800"
     height="600"
     frameborder="0"
@@ -117,7 +117,7 @@ Below is a histogram showing the distribution of power outages on a monthly basi
 An interesting observation is that the distribution of outages in this visualization could possibly be normally distributed, or at least looks like it, with a peak reported number of outages in August of 2011.
 
  <iframe
- src="assets/map.html"
+ src="assets/htmls/map.html"
  width="800"
  height="600"
  frameborder="0"
@@ -148,5 +148,54 @@ Looking at the handful of options I created, I decided to focus on regression. C
 Predict the Average monthly electricity price in the U.S. state (TOTAL.PRICE)
 
 ## Step 4: Baseline Model
+
+The first thing I wanted to do when building a model was to make sure I preprocess all of my data given in my dataset. This let me to working on a pipeline that preprocessses all of the info before feeding it into the regression model. Since my data contains both numerical, categorical, and pd.Datetime datatypes, I will need to make sure I build my pipeline in such a way that all of this data is handled properly.
+
+As a refresher, here are the features that are each datatype:
+
+#### Categorical
+- 'U.S._STATE','NERC.REGION','CLIMATE.CATEGORY','CAUSE.CATEGORY'
+
+- **Special note:** all of the categorical features that I am using is nominal, meaning that there is no inherent order in the categories that I have listed
+
+#### Numerical
+'YEAR', 'MONTH','OUTAGE.DURATION','TOTAL.SALES','TOTAL.CUSTOMERS','ANOMALY.LEVEL'
+
+#### Datetime
+'OUTAGE.START', 'OUTAGE.RESTORED'
+
+However, for my base model, I only wanted to use the categorical and numerical features to predict 'TOTAL.SALES'. 
+
+For my numerical pipeline, I decided to use sklearn's SimpleImputer to fill in any missing values in my data. Sklearn's SimpleImputer does this by using univariate imputation, meaning it only uses the feature that the missing value is in to compute the mean, leading to a more complete dataset, but being susceptible to outliers. Additionally, I also added a PolynomialFeatures transformer to help capture any non-linear relationships, which can help improve the model performance.
+
+This is what my numerical preprocessor looks like:
+
+<iframe
+ src="assets/htmls/numerical_preprocessing.html"
+ width="800"
+ height="600"
+ frameborder="0"
+ ></iframe>
+
+For my categorical pipeline, I decided to use 
+
+Hence, this is what my preprocessing pipeline looked like:
+
+<iframe
+ src="assets/htmls/baseline_preprocessing.html"
+ width="800"
+ height="600"
+ frameborder="0"
+ ></iframe>
+
+ From there, I built my baseline model using sklearn's Linear Regression model:
+ <iframe
+ src="assets/htmls/base_model.html"
+ width="800"
+ height="600"
+ frameborder="0"
+ ></iframe>
+
+
 
 ## Step 5: Final Model
