@@ -60,9 +60,20 @@ These two new features are added to my working list of features that I will used
 ## Exploratory Data Analysis
 
  <iframe
-    src="assets/bars.html"
+    src="assets/hist.html"
     width="800"
     height="600"
     frameborder="0"
  ></iframe>
 
+Here was a quick histogram I made to see if I could identify any trends in the number of outages in particular based on the time of year (in this case, finding the total number of outages per month). The reason I chose to depict 2011 in particular from this dataset, was that 2011 had the most amount of outages, so I was hoping to utilize the fact that the year 2011 had the highest population of outages, and therefore could maybe identify any interesting trends.
+
+
+ <iframe
+ src="assets/map.html"
+ width="800"
+ height="600"
+ frameborder="0"
+ ></iframe>
+
+Continuing on the same vein as earlier, here is a map of the United States
