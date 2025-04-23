@@ -61,7 +61,7 @@ These two new features are added to my working list of features from the outages
 
 To start, I decided to investigate the outage durations on a monthly and yearly basis. Below is a table containing the total number of minutes in outage duration from each month between 2000-2016, with the total duration of outages summed to in the right-most column:
 
-Below is a table containing the total sum of power outage durations (in hours) on a "per month per year" basis, including a total outage duration for each year on the very right:
+Below is a table containing the **total sum of power outage durations (in hours) on a "per month per year" basis**:
 
 |   Year |     Jan |    Feb |     Mar |    April |   May |     June |    July |     Aug |    Sept |     Oct |    Nov |   Dec | 
 |-------:|--------:|--------:|--------:|-------:|-------:|--------:|--------:|--------:|--------:|--------:|-------:|--------:|
@@ -83,7 +83,7 @@ Below is a table containing the total sum of power outage durations (in hours) o
 |   2015 |   17.13 |   74.17 |   31.98 | 167.07 | 159.93 |  424.23 |  137.53 |  308.08 |    7.1  |   99.4  | 125.08 |  101.55 |
 |   2016 |   35.3  |   35.37 |  941.55 | 106.57 | 446.98 |    0.28 |    0    |    0    |    0    |    0    |   0    |    0    |
 
-Here is an additional table showing the average duration of power outages of each month:
+Here is an additional table showing the **average duration of power outages of each month**:
 
 |                             |     Jan |    Feb |     Mar |    April |   May |     June |    July |     Aug |    Sept |     Oct |    Nov |   Dec |
 |:----------------------------|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-------:|
@@ -91,13 +91,13 @@ Here is an additional table showing the average duration of power outages of eac
 
 
 
-And the total duration of each year:
+And the **total duration of outages each year**:
 
 |                            |   2000 |    2001 |    2002 |    2003 |    2004 |    2005 |    2006 |   2007 |   2008 |    2009 |    2010 |   2011 |    2012 |    2013 |    2014 |    2015 |    2016 |
 |:---------------------------|-------:|--------:|--------:|--------:|--------:|--------:|--------:|-------:|-------:|--------:|--------:|-------:|--------:|--------:|--------:|--------:|--------:|
 | Total Outage Duration (hr) |    616 | 296.817 | 1108.57 | 3566.87 | 5169.73 | 4760.05 | 3662.48 |   2103 | 7670.7 | 4697.67 | 5189.63 | 8077.2 | 5414.83 | 3468.55 | 5386.08 | 1653.27 | 1566.05 |
 
-Looking at this visualization, we can look to identify any trends in the outages from the entirety of our population. For starters, I identified the year with the longest power outage durations to be 2011. This allowed me to focus on 2011 to see if I can identify any distributions or patterns in the data by looking at the largest sub-sample within my data.
+These tables allow us to look and identify any trends in the outages from the entirety of our population. For starters, I identified the year with the longest power outage durations to be 2011. This allowed me to focus on 2011 to see if I can identify any distributions or patterns in the data by looking at the largest sub-sample within my data.
 
 Below is a histogram showing the distribution of power outages on a monthly basis - a similar collection of data as our tables from earlier, but this time a bit more visual.
 
@@ -109,7 +109,6 @@ Below is a histogram showing the distribution of power outages on a monthly basi
  ></iframe>
 
 An interesting observation is that the distribution of outages in this visualization could possibly be normally distributed, or at least looks like it, with a peak reported number of outages in August of 2011.
-
 
  <iframe
  src="assets/map.html"
