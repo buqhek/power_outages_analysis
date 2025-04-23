@@ -47,6 +47,7 @@ To start, one thing I wanted to do was to do some feature engineering by combini
 ### Imputation
 In order to do this, I identified the missing values in the outage start and end date, and chose to drop them from the dataset. This removed 9 rows from the 1476 starting amount, which was only 0.61% of the data, which is fine by me.
 
+### Feature Engineering
 From there, I combined the features 'OUTAGE.START.DATE' and 'OUTAGE.START.TIME' to make 'OUTAGE.START' and combined 'OUTAGE.RESTORATION.DATE' and 'OUTAGE.RESTORATION.TIME' to make 'OUTAGE.RESTORED'.
 
 These two new features are added to my working list of features from the outages dataset to get a subset that looks something like this:
@@ -145,3 +146,5 @@ Looking at the handful of options I created, I decided to focus on regression. C
 Predict the Average monthly electricity price in the U.S. state (TOTAL.PRICE)
 
 ## Step 4: Baseline Model
+
+## Step 5: Final Model
