@@ -2,7 +2,7 @@
 
 ## Introduction
 
-First and foremost, I would like to acknowledge that this dataset was collected by Purdue University, located [here](https://engineering.purdue.edu/LASCI/research-data/outages). It contains various pieces of information about power outages, electricity consumption patterns, and other pieces of information about the power outages across the United States between 2000-2016. The main point of this analysis is to take a look at how the world around us impacts our lives in ways we might not really think about. 
+First and foremost, I would like to acknowledge that this dataset was collected by Purdue University, located [here](https://engineering.purdue.edu/LASCI/research-data/outages). It contains various pieces of information about the climate, electricity consumption patterns, and other pieces of useful information regarding the power outages across the United States between the years 2000-2016. The main point of this analysis is to take a look at how the world around us impacts our lives in ways we might not really think about. 
 
 As a result, what makes this dataset and analysis very interesting seeing whether we can predict the monthly price (per kilowatt-hour) of our electricity, given a variety of parameters, like state, outage start and end time, month, year, etc...
 
@@ -81,3 +81,40 @@ An interesting observation is that the distribution of outages in this visualiza
  ></iframe>
 
 Continuing on the same vein as earlier, I created a choropleth map of the United States, visualizing the number of outages from the population of all recorded outages from Purdue University between the years of 2000 and 2016. The goal of this visualization was to see if there were certain regions that outages were more common in. As you can see, there does not seem to be a clear trend in NERC regions (meaning that there seems to be a cluster of high-power outages in a single given NERC Region), but there seems to be a higher amount of outages in California, Texas, Michigan, and Washington.
+
+Further, I decided to investigate the outage durations on a monthly and yearly basis. Below is a table containing the total number of minutes in outage duration from each month between 2000-2016, with the total duration of outages summed to in the right-most column:
+
+Below is a table containing the total sum of power outage durations (in hours) on a "per month per year" basis, including a total outage duration for each year on the very right:
+
+|   Year |     Jan |    Feb |     Mar |    April |   May |     June |    July |     Aug |    Sept |     Oct |    Nov |   Dec | 
+|-------:|--------:|--------:|--------:|-------:|-------:|--------:|--------:|--------:|--------:|--------:|-------:|--------:|
+|   2000 |  234    |    0    |    1.17 |   0    | 243.33 |    1.1  |    0    |   82    |    0    |    0    |   0    |   54.4  |
+|   2001 |   64.83 |    0    |   42.57 |   0    |   5.38 |  180.02 |    0    |    4.02 |    0    |    0    |   0    |    0    |
+|   2002 |  455    |    0.78 |   60    |   0    |   0    |    0    |    0    |    9.43 |    0    |    0    | 184    |  399.35 |
+|   2003 |   24    |   56.47 |    0    | 128.23 | 780.62 |   25.8  |  413.65 |  458.42 |  494.9  |  573.17 | 345.68 |  265.93 |
+|   2004 |  367.35 |  109.02 |  298.95 | 108.17 | 688    |  274.27 | 1823.9  |  309.43 |  840.5  |  237.52 |  21    |   91.63 |
+|   2005 |  795.83 |    0    |    4    | 240.13 |  25.5  |  456.27 |  274.58 |  812.17 | 1307.28 |  443    | 235.2  |  166.08 |
+|   2006 |   53.05 |  545.53 |   39.5  |  95.42 |  13.37 |  101.45 |  665.45 |   12    |  165.5  |  591.77 | 258.58 | 1120.87 |
+|   2007 |  186.5  |  187.68 |   11.5  | 172.63 | 162.95 |   14.38 |  293.65 |  307.03 |   59.88 |  137.87 |   0    |  568.92 |
+|   2008 |  410.65 |  532.42 |   44.73 |  93.25 | 242.18 | 1026.67 |  531.38 |  738.1  | 3089.87 |   51    |  37.85 |  872.6  |
+|   2009 | 1651.58 |  234.63 | 1388.8  | 219.83 | 178.2  |  438.22 |  137.95 |  159.53 |    0    |   76.27 |  15.75 |  196.9  |
+|   2010 |  541.27 |  912.25 |  616.32 |  52.67 |  14.52 |  986.55 |  454.17 |  559.13 |  184.78 |  241.75 | 181.78 |  444.45 |
+|   2011 |  347.85 |  608.18 |  645.08 | 615.43 | 743.87 |  330.02 |  602.35 | 2076.92 |  273.32 | 1462.47 |  42.57 |  329.15 |
+|   2012 |   80.9  |   66.98 |  145.98 | 248.23 |  71.25 | 1165.87 |  762.47 |  167.35 |   58.47 | 2529.17 |  27.75 |   90.42 |
+|   2013 |  158.88 |  229.08 |   36.02 | 158.87 | 232.58 |  393.08 |  271.63 |  108.05 |  103.33 |   38.32 | 512.13 | 1226.57 |
+|   2014 | 2085.82 | 1901.15 |  808.42 | 257.55 | 111.3  |  221.85 |    0    |    0    |    0    |    0    |   0    |    0    |
+|   2015 |   17.13 |   74.17 |   31.98 | 167.07 | 159.93 |  424.23 |  137.53 |  308.08 |    7.1  |   99.4  | 125.08 |  101.55 |
+|   2016 |   35.3  |   35.37 |  941.55 | 106.57 | 446.98 |    0.28 |    0    |    0    |    0    |    0    |   0    |    0    |
+
+Here is an additional table showing the average duration of power outages of each month:
+
+|                             |     Jan |    Feb |     Mar |    April |   May |     June |    July |     Aug |    Sept |     Oct |    Nov |   Dec |
+|:----------------------------|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-------:|
+| Avg Outage Duration (HR) | 56.4658 | 41.6191 | 54.4316 | 24.8977 | 34.6216 | 32.4734 | 38.5983 | 40.4746 | 71.5754 | 60.0156 | 28.8027 | 54.8965 |
+
+And the total duration of each year:
+|                            |   2000 |    2001 |    2002 |    2003 |    2004 |    2005 |    2006 |   2007 |   2008 |    2009 |    2010 |   2011 |    2012 |    2013 |    2014 |    2015 |    2016 |
+|:---------------------------|-------:|--------:|--------:|--------:|--------:|--------:|--------:|-------:|-------:|--------:|--------:|-------:|--------:|--------:|--------:|--------:|--------:|
+| Total Outage Duration (hr) |    616 | 296.817 | 1108.57 | 3566.87 | 5169.73 | 4760.05 | 3662.48 |   2103 | 7670.7 | 4697.67 | 5189.63 | 8077.2 | 5414.83 | 3468.55 | 5386.08 | 1653.27 | 1566.05 |
+
+Looking at this visualization, we can look to identify any trends in the outages from the entirety of our population.
