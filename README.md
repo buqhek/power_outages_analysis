@@ -164,35 +164,43 @@ As a refresher, here are the features that are each datatype:
 #### Datetime
 'OUTAGE.START', 'OUTAGE.RESTORED'
 
+---
+
 However, for my base model, I only wanted to use the categorical and numerical features to predict 'TOTAL.SALES'. 
 
-For my numerical pipeline, I decided to use sklearn's SimpleImputer to fill in any missing values in my data. Sklearn's SimpleImputer does this by using univariate imputation, meaning it only uses the feature that the missing value is in to compute the mean, leading to a more complete dataset, but being susceptible to outliers. Additionally, I also added a PolynomialFeatures transformer to help capture any non-linear relationships, which can help improve the model performance.
+### Building the Preprocessing Pipeline
+
+For my numerical pipeline, I decided to use sklearn's SimpleImputer to fill in any missing values in my data by taking the mean and using that to fill values. Sklearn's SimpleImputer does this by using univariate imputation, meaning it only uses the feature that the missing value is in to compute the mean, leading to a more complete dataset, but being susceptible to outliers. Additionally, I also added a PolynomialFeatures transformer to help capture any non-linear relationships, which can help improve the model performance.
 
 This is what my numerical preprocessor looks like:
 
 <iframe
  src="assets/htmls/numerical_preprocessing.html"
- width="800"
- height="600"
+ width="400"
+ height="200"
  frameborder="0"
  ></iframe>
 
-For my categorical pipeline, I decided to use 
+For my categorical pipeline, I decided to use sklearn's SimpleImputer here, too, but this time to fill missing values with the most frequent value of each feature. Again, because this is a univariate SimpleImputer, it looks at each feature to fill the missing values with the most frequent value. I also uses
+
+This is what my categorical preprocessor looks like:
 
 Hence, this is what my preprocessing pipeline looked like:
 
 <iframe
  src="assets/htmls/baseline_preprocessing.html"
- width="800"
- height="600"
+ width="400"
+ height="200"
  frameborder="0"
  ></iframe>
+
+### Building the Baseline Model
 
  From there, I built my baseline model using sklearn's Linear Regression model:
  <iframe
  src="assets/htmls/base_model.html"
- width="800"
- height="600"
+ width="400"
+ height="200"
  frameborder="0"
  ></iframe>
 
