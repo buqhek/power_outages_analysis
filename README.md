@@ -59,5 +59,10 @@ These two new features are added to my working list of features that I will used
 
 ## Exploratory Data Analysis
 
-
+ <iframe
+    src="assets/bars.html"
+    width="800"
+    height="600"
+    frameborder="0"
+ ></iframe>
 
