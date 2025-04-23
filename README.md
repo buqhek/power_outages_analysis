@@ -2,9 +2,11 @@
 
 ## Introduction
 
-This dataset was collected by Purdue University. It contains various pieces of information about power outages, electricity consumption patterns, and other pieces of information about the United States. What makes this dataset, and this analysis very interesting, is to see whether we can predict the monthly price (per kilowatt-hour) of our electricity, given a variety of parameters, like state, outage start and end time, month, year, etc...
+This dataset was collected by Purdue University. It contains various pieces of information about power outages, electricity consumption patterns, and other pieces of information about the United States. What makes this dataset and analysis very interesting is to see whether we can predict the monthly price (per kilowatt-hour) of our electricity, given a variety of parameters, like state, outage start and end time, month, year, etc...
 
-The main point of this analysis is to take a look at how the world around us impacts our lives in ways we might not really think about. The total number of rows in the dataset are 1476, with a total of 54 columns as well. However, we won't be using all of those columns to predict our variable: 
+The main point of this analysis is to take a look at how the world around us impacts our lives in ways we might not really think about. 
+
+The total number of rows in the dataset are 1476, with a total of 54 columns as well. However, we won't be using all of those columns to predict our variable: 
 
 Out of all the columns, the numerical ones that we will be focusing on are: 
 
@@ -28,16 +30,14 @@ And the categorical ones are:
 
 **- Nerc Region:** Regions in North America created by "The North American Electric Reliability Corporation" that were involved in the outage event.
 
-**- Climate Category:** This represents the climate episodes corresponding to the years. The categories—“Warm”, “Cold” or “Normal” episodes of the climate are based on a threshold of ± 0.5 °C for the Oceanic Niño Index (ONI).
-
-**- Cause Category:** Cause of the power outage event.
-
-
-
 <figure>
   <img src="assets/imgs/Nerc_Regions_Map.jpg" alt="Map of NERC Regions of North America">
   <figcaption align="center"><em>Map of the NERC Regions of North America.</em></figcaption>
 </figure>
+
+**- Climate Category:** This represents the climate episodes corresponding to the years. The categories—“Warm”, “Cold” or “Normal” episodes of the climate are based on a threshold of ± 0.5 °C for the Oceanic Niño Index (ONI).
+
+**- Cause Category:** Cause of the power outage event.
 
 
 ## Data Cleaning 
@@ -46,7 +46,7 @@ To start, one thing I wanted to do was to do some feature engineering by combini
 
 From there, I combined the features 'OUTAGE.START.DATE' and 'OUTAGE.START.TIME' to make 'OUTAGE.START' and combined 'OUTAGE.RESTORATION.DATE' and 'OUTAGE.RESTORATION.TIME' to make 'OUTAGE.RESTORED'.
 
-These two new features are added to my working list of features that I will used to predict the TOTAL.PRICE, with the current outages dataframe looking something like this:
+These two new features are added to my working list of features from the outages dataset to get a subset that looks something like this:
 
 
 | U.S._STATE   | NERC.REGION   | CLIMATE.CATEGORY   | CAUSE.CATEGORY     |   YEAR |   MONTH |   OUTAGE.DURATION |   TOTAL.SALES |   TOTAL.CUSTOMERS |   ANOMALY.LEVEL | OUTAGE.START        | OUTAGE.RESTORED     |   TOTAL.PRICE |
