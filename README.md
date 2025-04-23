@@ -292,4 +292,39 @@ Perhaps in the future, with more time, and learning how a bit of CUDA or other p
 To make my final model better, I first need to go back to my preprocessing pipeline from before and add a datetime preprocessor to it.
 
 For my datetime preprocessor, I spent a lot of time thinking of unique features I could engineer from knowing the exact date and time of an outage starting and ending. Below are some of the ideas I thought of:   
-    - 
+
+- **Basic Temporal Features:** Building featurs for the day, month, hour, day of week (like Monday or Wednesday), or fiscal quarter.
+
+- **Basic Business Context** Building binary features that checks if the outages starts on a weekend, or during business hours.
+
+- **Different Times of Day:** Required splitting up the 24 hours of a day as morning, afternoon, evening, and night, and seeing when an outage starts according to that (Binary Feature).
+
+- **Peak Demand Hours:** Checking if an outage starts during business peak demand hours, which I labeled as being between 4-8pm.
+
+- **Seasonal Indicators:** Splitting the months into different seasons, and checking when an outage starts according to that
+
+Ultimately, I built a function transformer that does all of this, and returns a dataframe containing all of this information. In addition to the function transformer, I also included a simple imputer that fills missing values with the mean. This was purposefully placed after the function transformer so that it could fill any possible missing values before the dataframe's information was passed into the actual regression function in the second part of the pipeline.
+
+This is what my Datetime preprocessor looks like:
+
+<iframe
+ src="assets/htmls/datetime_preprocessing.html"
+ width="325"
+ height="150"
+ frameborder="0"
+ ></iframe>
+
+ ---
+
+ As a result, my new final preprocessing function (including this new Datetime processor) looks like this:
+ 
+<iframe
+ src="assets/htmls/final_preprocessing.html"
+ width="700"
+ height="150"
+ frameborder="0"
+ ></iframe>
+
+### Testing Models
+
+Before 
