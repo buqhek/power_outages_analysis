@@ -59,6 +59,8 @@ These two new features are added to my working list of features from the outages
 
 ## Exploratory Data Analysis
 
+During my initial time with the data, I decided to ask myself a variety of surface level questions to see if I can determine any trends that might make for interesting analysis questions when developing a model for the dataset. 
+
  <iframe
     src="assets/hist.html"
     width="800"
@@ -66,7 +68,9 @@ These two new features are added to my working list of features from the outages
     frameborder="0"
  ></iframe>
 
-Here was a quick histogram I made to see if I could identify any trends in the number of outages in particular based on the time of year (in this case, finding the total number of outages per month). The reason I chose to depict 2011 in particular from this dataset, was that 2011 had the most amount of outages, so I was hoping to utilize the fact that the year 2011 had the highest population of outages, and therefore could maybe identify any interesting trends.
+To start, I quickly developed this quick histogram to see if I could identify any trends in the number of outages in particular based on the time of year (in this case, finding the total number of outages per month). The reason I chose to depict 2011 in particular from this dataset, was that 2011 had the most amount of outages, so I was hoping to utilize the fact that the year 2011 had the highest population of outages, and therefore could maybe identify any interesting trends. 
+
+An interesting observation is that the distribution of outages in this visualization could possibly be normally distributed, or at least looks like it, with a peak reported number of outages in August of 2011.
 
 
  <iframe
@@ -76,4 +80,4 @@ Here was a quick histogram I made to see if I could identify any trends in the n
  frameborder="0"
  ></iframe>
 
-Continuing on the same vein as earlier, here is a map of the United States
+Continuing on the same vein as earlier, I created a choropleth map of the United States, visualizing the number of outages from the population of all recorded outages from Purdue University between the years of 2000 and 2016. The goal of this visualization was to see if there were certain regions that outages were more common in. As you can see, there does not seem to be a clear trend in NERC regions (meaning that there seems to be a cluster of high-power outages in a single given NERC Region), but there seems to be a higher amount of outages in California, Texas, Michigan, and Washington.
