@@ -130,19 +130,21 @@ Continuing on the same vein as earlier, I created a choropleth map of the United
 Looking having spent a lot of time looking at outage durations, I was sure I wanted to focus on that as a predictor for whatever type of regression or classification problem I wanted to look at. At this point, I had developed a short list of ideas I had:
 
 
-#### Classification Ideas
+### Classification Ideas
 - Predict the severity (in terms of number of customers, duration, or demand loss) of a major power outage: This is a multiclass classification problem, with options for the classes being:
     1. Heavy outage
     2. Medium outage
     3. Light outage
 
-#### Regression Ideas
+### Regression Ideas
 - Predict the Oceanic Niño Index (ONI) -- or ANOMALY.LEVEL based on the number of customers, start/end date, etc...
 - Predict the Average monthly electricity price in the U.S. state (TOTAL.PRICE)
+ 
+ ---
 
 Looking at the handful of options I created, I decided to focus on regression. Classification sounded very intersting, but with an interest in looking at the financial side of this dataset, I found myself more drawn to building a regression model. As a result, I chose to predict the average monthly electricity price in the U.S. state!
 
-#### Final Decision
+### Final Decision
 Predict the Average monthly electricity price in the U.S. state (TOTAL.PRICE)
 
 ## Step 4: Baseline Model
