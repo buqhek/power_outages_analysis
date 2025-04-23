@@ -176,8 +176,8 @@ This is what my numerical preprocessor looks like:
 
 <iframe
  src="assets/htmls/numerical_preprocessing.html"
- width="350"
- height="175"
+ width="325"
+ height="150"
  frameborder="0"
  ></iframe>
 
@@ -187,8 +187,8 @@ This is what my categorical preprocessor looks like:
 
 <iframe
  src="assets/htmls/categorical_prepocessing.html"
- width="400"
- height="100"
+ width="325"
+ height="150"
  frameborder="0"
  ></iframe>
 
@@ -197,7 +197,7 @@ Combining the numerican and categorical preprocessor, inside a column transforme
 <iframe
  src="assets/htmls/baseline_preprocessing.html"
  width="600"
- height="200"
+ height="150"
  frameborder="0"
  ></iframe>
 
@@ -207,7 +207,7 @@ Combining the numerican and categorical preprocessor, inside a column transforme
  <iframe
  src="assets/htmls/base_model.html"
  width="600"
- height="200"
+ height="250"
  frameborder="0"
  ></iframe>
 
@@ -216,7 +216,7 @@ However, I wanted to go a bit further and build a second model that uses regular
  <iframe
  src="assets/htmls/base_model.html"
  width="600"
- height="200"
+ height="250"
  frameborder="0"
  ></iframe>
 
