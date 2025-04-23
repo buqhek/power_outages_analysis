@@ -170,7 +170,7 @@ However, for my base model, I only wanted to use the categorical and numerical f
 
 ### Building the Preprocessing Pipeline
 
-For my numerical pipeline, I decided to use sklearn's SimpleImputer to fill in any missing values in my data by taking the mean and using that to fill values. Sklearn's SimpleImputer does this by using univariate imputation, meaning it only uses the feature that the missing value is in to compute the mean, leading to a more complete dataset, but being susceptible to outliers. Additionally, I also added a PolynomialFeatures transformer to help capture any non-linear relationships, which can help improve the model performance.
+For my numerical pipeline, I decided to use sklearn's SimpleImputer to fill in any missing values in my data by taking the mean and using that to fill values. Sklearn's SimpleImputer does this by using univariate imputation, meaning it only uses the feature that the missing value is in to compute the mean, leading to a more complete dataset, but being susceptible to outliers. Additionally, I also added a PolynomialFeatures transformer to help capture any non-linear relationships, which can help improve the model performance. I set the degree for the polynomial features to 2 as a start - it'll be a hyperparameter that I later tweak when I am testing different models.
 
 This is what my numerical preprocessor looks like:
 
@@ -185,12 +185,19 @@ For my categorical pipeline, I decided to use sklearn's SimpleImputer here, too,
 
 This is what my categorical preprocessor looks like:
 
-Hence, this is what my preprocessing pipeline looked like:
+<iframe
+ src="assets/htmls/categorical_preprocessing.html"
+ width="400"
+ height="200"
+ frameborder="0"
+ ></iframe>
+
+Combining the numerican and categorical preprocessor, inside a column transformer, this is what the finished baseline preprocessor looks like:
 
 <iframe
  src="assets/htmls/baseline_preprocessing.html"
- width="400"
- height="200"
+ width="600"
+ height="300"
  frameborder="0"
  ></iframe>
 
@@ -199,11 +206,19 @@ Hence, this is what my preprocessing pipeline looked like:
  From there, I built my baseline model using sklearn's Linear Regression model:
  <iframe
  src="assets/htmls/base_model.html"
- width="400"
- height="200"
+ width="600"
+ height="300"
  frameborder="0"
  ></iframe>
 
+However, I wanted to go a bit further and build a second model that uses regularization to help reduce the overfitting that may be induced by the PolynomialFeatures transformer in the preprocessing pipeline. Hence, I built a model that uses Lasso Regression instead, with an alpha value of 1 to start:
+
+ <iframe
+ src="assets/htmls/base_model.html"
+ width="600"
+ height="300"
+ frameborder="0"
+ ></iframe>
 
 
 ## Step 5: Final Model
