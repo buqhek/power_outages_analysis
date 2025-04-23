@@ -211,14 +211,14 @@ Combining the numerican and categorical preprocessor, inside a column transforme
  frameborder="0"
  ></iframe>
 
-However, I wanted to go a bit further and build a second model that uses regularization to help reduce the overfitting that may be induced by the PolynomialFeatures transformer in the preprocessing pipeline. Hence, I built a model that uses Lasso Regression instead, with an alpha value of 1 to start:
+However, I wanted to go a bit further tune the hyperparameter of the PolynomialFeatures degree for my basemodel. I did this utilizing sklearn's GridSearchCV, where I found that for my basemodel, a degree of 1 is actually the best, meaning that it essentially makes my model ignore the polynomialfeatures transformer, which I think is quite funny.
 
- <iframe
- src="assets/htmls/base_model.html"
- width="600"
- height="250"
- frameborder="0"
- ></iframe>
+And here is the visualization of my model's peformance, using mean squared error (better means the closer the MSE is to zero):
+
+|    | Models               |      MSE |
+|---:|:---------------------|---------:|
+|  0 | Baseline Model       | 25.4768  |
+|  1 | Tuned Baseline Model |  7.76278 |
 
 
 ## Step 5: Final Model
