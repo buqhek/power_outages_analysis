@@ -176,8 +176,8 @@ This is what my numerical preprocessor looks like:
 
 <iframe
  src="assets/htmls/numerical_preprocessing.html"
- width="400"
- height="200"
+ width="350"
+ height="175"
  frameborder="0"
  ></iframe>
 
@@ -186,9 +186,9 @@ For my categorical pipeline, I decided to use sklearn's SimpleImputer here, too,
 This is what my categorical preprocessor looks like:
 
 <iframe
- src="assets/htmls/categorical_preprocessing.html"
+ src="assets/htmls/categorical_prepocessing.html"
  width="400"
- height="200"
+ height="100"
  frameborder="0"
  ></iframe>
 
