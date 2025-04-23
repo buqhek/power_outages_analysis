@@ -59,30 +59,7 @@ These two new features are added to my working list of features from the outages
 
 ## Exploratory Data Analysis
 
-During my initial time with the data, I decided to ask myself a variety of surface level questions to see if I can determine any trends that might make for interesting analysis questions when developing a model for the dataset. 
-
- <iframe
-    src="assets/hist.html"
-    width="800"
-    height="600"
-    frameborder="0"
- ></iframe>
-
-To start, I quickly developed this quick histogram to see if I could identify any trends in the number of outages in particular based on the time of year (in this case, finding the total number of outages per month). The reason I chose to depict 2011 in particular from this dataset, was that 2011 had the most amount of outages, so I was hoping to utilize the fact that the year 2011 had the highest population of outages, and therefore could maybe identify any interesting trends. 
-
-An interesting observation is that the distribution of outages in this visualization could possibly be normally distributed, or at least looks like it, with a peak reported number of outages in August of 2011.
-
-
- <iframe
- src="assets/map.html"
- width="800"
- height="600"
- frameborder="0"
- ></iframe>
-
-Continuing on the same vein as earlier, I created a choropleth map of the United States, visualizing the number of outages from the population of all recorded outages from Purdue University between the years of 2000 and 2016. The goal of this visualization was to see if there were certain regions that outages were more common in. As you can see, there does not seem to be a clear trend in NERC regions (meaning that there seems to be a cluster of high-power outages in a single given NERC Region), but there seems to be a higher amount of outages in California, Texas, Michigan, and Washington.
-
-Further, I decided to investigate the outage durations on a monthly and yearly basis. Below is a table containing the total number of minutes in outage duration from each month between 2000-2016, with the total duration of outages summed to in the right-most column:
+To start, I decided to investigate the outage durations on a monthly and yearly basis. Below is a table containing the total number of minutes in outage duration from each month between 2000-2016, with the total duration of outages summed to in the right-most column:
 
 Below is a table containing the total sum of power outage durations (in hours) on a "per month per year" basis, including a total outage duration for each year on the very right:
 
@@ -112,9 +89,34 @@ Here is an additional table showing the average duration of power outages of eac
 |:----------------------------|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-------:|
 | Avg Outage Duration (HR) | 56.4658 | 41.6191 | 54.4316 | 24.8977 | 34.6216 | 32.4734 | 38.5983 | 40.4746 | 71.5754 | 60.0156 | 28.8027 | 54.8965 |
 
+
+
 And the total duration of each year:
+
 |                            |   2000 |    2001 |    2002 |    2003 |    2004 |    2005 |    2006 |   2007 |   2008 |    2009 |    2010 |   2011 |    2012 |    2013 |    2014 |    2015 |    2016 |
 |:---------------------------|-------:|--------:|--------:|--------:|--------:|--------:|--------:|-------:|-------:|--------:|--------:|-------:|--------:|--------:|--------:|--------:|--------:|
 | Total Outage Duration (hr) |    616 | 296.817 | 1108.57 | 3566.87 | 5169.73 | 4760.05 | 3662.48 |   2103 | 7670.7 | 4697.67 | 5189.63 | 8077.2 | 5414.83 | 3468.55 | 5386.08 | 1653.27 | 1566.05 |
 
-Looking at this visualization, we can look to identify any trends in the outages from the entirety of our population.
+Looking at this visualization, we can look to identify any trends in the outages from the entirety of our population. For starters, I identified the year with the longest power outage durations to be 2011. This allowed me to focus on 2011 to see if I can identify any distributions or patterns in the data by looking at the largest sub-sample within my data.
+
+Below is a histogram showing the distribution of power outages on a monthly basis - a similar collection of data as our tables from earlier, but this time a bit more visual.
+
+ <iframe
+    src="assets/hist.html"
+    width="800"
+    height="600"
+    frameborder="0"
+ ></iframe>
+
+An interesting observation is that the distribution of outages in this visualization could possibly be normally distributed, or at least looks like it, with a peak reported number of outages in August of 2011.
+
+
+ <iframe
+ src="assets/map.html"
+ width="800"
+ height="600"
+ frameborder="0"
+ ></iframe>
+
+Continuing on the same vein as earlier, I created a choropleth map of the United States, visualizing the number of outages between the years of 2000 and 2016. The goal of this visualization was to see if there were certain regions that outages were more common in. As you can see, there **does not seem to be a clear focus of outages in certain NERC regions**, but there seems to be specifically a higher amount of outages in California, Texas, Michigan, and Washington.
+
