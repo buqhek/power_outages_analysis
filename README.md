@@ -8,7 +8,7 @@ The main point of this analysis is to take a look at how the world around us imp
 
 The total number of rows in the dataset are 1476, with a total of 54 columns as well. However, we won't be using all of those columns to predict our variable: 
 
-Out of all the columns, the numerical ones that we will be focusing on are: 
+#### <u>Numerical Columns:</u> 
 
 **- Year:** e.g. 2011, 2014.
 
@@ -24,7 +24,7 @@ Out of all the columns, the numerical ones that we will be focusing on are:
 
 **- Anomaly Level:** This represents the oceanic El Niño/La Niña (ONI) index referring to the cold and warm episodes by season - essentially indicators for the environmental climate.
 
-And the categorical ones are:
+#### <u>Categorical Columns:</u>
 
 **- US State:** The state in which the outage occurs in.
 
