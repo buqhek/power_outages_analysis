@@ -2,11 +2,11 @@
 
 ## Introduction
 
-This dataset was collected by Purdue University. It contains various pieces of information about power outages, electricity consumption patterns, and other pieces of information about the United States. What makes this dataset and analysis very interesting is to see whether we can predict the monthly price (per kilowatt-hour) of our electricity, given a variety of parameters, like state, outage start and end time, month, year, etc...
+First and foremost, I would like to acknowledge that this dataset was collected by Purdue University, located [here](https://engineering.purdue.edu/LASCI/research-data/outages). It contains various pieces of information about power outages, electricity consumption patterns, and other pieces of information about the power outages across the United States between 2000-2016. The main point of this analysis is to take a look at how the world around us impacts our lives in ways we might not really think about. 
 
-The main point of this analysis is to take a look at how the world around us impacts our lives in ways we might not really think about. 
+As a result, what makes this dataset and analysis very interesting seeing whether we can predict the monthly price (per kilowatt-hour) of our electricity, given a variety of parameters, like state, outage start and end time, month, year, etc...
 
-The total number of rows in the dataset are 1476, with a total of 54 columns as well. However, we won't be using all of those columns to predict our variable: 
+An important piece of information about this dataset: total number of rows = 1476, and total number of columns = 54. However, we won't be using all columns, so don't worry about having to understand each feature that is present in this dataset.
 
 #### <u>Numerical Columns:</u> 
 
