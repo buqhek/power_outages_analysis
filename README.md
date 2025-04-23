@@ -1,6 +1,6 @@
 # Can Power Outages Predict Your Monthly Electricity Bill?
 
-## Introduction
+## **Introduction**
 
 First and foremost, I would like to acknowledge that this dataset was collected by Purdue University, located [here](https://engineering.purdue.edu/LASCI/research-data/outages). It contains various pieces of information about the climate, electricity consumption patterns, and other pieces of useful information regarding the power outages across the United States between the years 2000-2016. The main point of this analysis is to take a look at how the world around us impacts our lives in ways we might not really think about. 
 
@@ -40,7 +40,7 @@ An important piece of information about this dataset: total number of rows = 147
 **- Cause Category:** Cause of the power outage event.
 
 
-## Data Cleaning 
+## **Data Cleaning **
 
 To start, one thing I wanted to do was to do some feature engineering by combining the time of day and time of the year/month/ to make a proper outage start time and outage restoration time - each containing the year, month, day, hour, minute, and second of the outage start and end. 
 
@@ -61,7 +61,7 @@ These two new features are added to my working list of features from the outages
 | Minnesota    | MRO           | normal             | severe weather     |   2012 |       6 |              2550 |       5787064 |       2.60681e+06 |            -0.1 | 2012-06-19 04:30:00 | 2012-06-20 23:00:00 |          9.19 |
 | Minnesota    | MRO           | warm               | severe weather     |   2015 |       7 |              1740 |       5970339 |       2.67353e+06 |             1.2 | 2015-07-18 02:00:00 | 2015-07-19 07:00:00 |         10.43 |
 
-## Exploratory Data Analysis
+## **Exploratory Data Analysis**
 
 To start, I decided to investigate the outage durations on a monthly and yearly basis. Below is a table containing the total number of minutes in outage duration from each month between 2000-2016, with the total duration of outages summed to in the right-most column:
 
@@ -125,7 +125,7 @@ An interesting observation is that the distribution of outages in this visualiza
 
 Continuing on the same vein as earlier, I created a choropleth map of the United States, visualizing the number of outages between the years of 2000 and 2016. The goal of this visualization was to see if there were certain regions that outages were more common in. As you can see, there **does not seem to be a clear focus of outages in certain NERC regions**, but there seems to be specifically a higher amount of outages in California, Texas, Michigan, and Washington.
 
-## Framing a Prediction Problem
+## **Framing a Prediction Problem**
 
 Looking having spent a lot of time looking at outage durations, I was sure I wanted to focus on that as a predictor for whatever type of regression or classification problem I wanted to look at. At this point, I had developed a short list of ideas I had:
 
@@ -147,7 +147,7 @@ Looking at the handful of options I created, I decided to focus on regression. C
 ### Final Decision
 Predict the Average monthly electricity price in the U.S. state (TOTAL.PRICE)
 
-## Baseline Model
+## **Baseline Model**
 
 The first thing I wanted to do when building a model was to make sure I preprocess all of my data given in my dataset. This let me to working on a pipeline that preprocessses all of the info before feeding it into the regression model. Since my data contains both numerical, categorical, and pd.Datetime datatypes, I will need to make sure I build my pipeline in such a way that all of this data is handled properly.
 
@@ -222,7 +222,7 @@ And here is the visualization of my model's peformance, using mean squared error
 
 At this point, I thought that my model was quite alright. I was trying to be mindful of how I engineered my data, was careful of my imputations, and felt that I had built a complex model that did it's job well, and wasn't make complex just for the sake of having a large diagram. However, there were still some things I wanted to add to my model, and test, such as adding the Datetime features I built during the EDA in the beginning of this project. I also wanted to add some kind of regularization to combat any overfitting that I may do with my polynomial features transformer.
 
-## Final Model
+## **Final Model**
 
 That leads to the work I spent making my final model. Here, my goals for attempting to improve my base model were quite simple:
     1. Incorporate the Datetime features, 'OUTAGE.START' and 'OUTAGE.RESTORED'
@@ -321,7 +321,7 @@ This is what my Datetime preprocessor looks like:
 <iframe
  src="assets/htmls/final_preprocessing.html"
  width="700"
- height="150"
+ height="210"
  frameborder="0"
  ></iframe>
 
