@@ -42,7 +42,10 @@ An important piece of information about this dataset: total number of rows = 147
 
 ## Data Cleaning 
 
-To start, one thing I wanted to do was to do some feature engineering by combining the time of day and time of the year/month/ to make a proper outage start time and outage restoration time - each containing the year, month, day, hour, minute, and second of the outage start and end. In order to do this, I identified the missing values in the outage start and end date, and chose to drop them from the dataset. This removed 9 rows from the 1476 starting amount, which was only 0.61% of the data, which is fine by me.
+To start, one thing I wanted to do was to do some feature engineering by combining the time of day and time of the year/month/ to make a proper outage start time and outage restoration time - each containing the year, month, day, hour, minute, and second of the outage start and end. 
+
+### Imputation
+In order to do this, I identified the missing values in the outage start and end date, and chose to drop them from the dataset. This removed 9 rows from the 1476 starting amount, which was only 0.61% of the data, which is fine by me.
 
 From there, I combined the features 'OUTAGE.START.DATE' and 'OUTAGE.START.TIME' to make 'OUTAGE.START' and combined 'OUTAGE.RESTORATION.DATE' and 'OUTAGE.RESTORATION.TIME' to make 'OUTAGE.RESTORED'.
 
@@ -121,3 +124,24 @@ An interesting observation is that the distribution of outages in this visualiza
 
 Continuing on the same vein as earlier, I created a choropleth map of the United States, visualizing the number of outages between the years of 2000 and 2016. The goal of this visualization was to see if there were certain regions that outages were more common in. As you can see, there **does not seem to be a clear focus of outages in certain NERC regions**, but there seems to be specifically a higher amount of outages in California, Texas, Michigan, and Washington.
 
+## Framing a Prediction Problem
+
+Looking having spent a lot of time looking at outage durations, I was sure I wanted to focus on that as a predictor for whatever type of regression or classification problem I wanted to look at. At this point, I had developed a short list of ideas I had:
+
+
+#### Classification Ideas
+- Predict the severity (in terms of number of customers, duration, or demand loss) of a major power outage: This is a multiclass classification problem, with options for the classes being:
+    1. Heavy outage
+    2. Medium outage
+    3. Light outage
+
+#### Regression Ideas
+- Predict the Oceanic Niño Index (ONI) -- or ANOMALY.LEVEL based on the number of customers, start/end date, etc...
+- Predict the Average monthly electricity price in the U.S. state (TOTAL.PRICE)
+
+Looking at the handful of options I created, I decided to focus on regression. Classification sounded very intersting, but with an interest in looking at the financial side of this dataset, I found myself more drawn to building a regression model. As a result, I chose to predict the average monthly electricity price in the U.S. state!
+
+#### Final Decision
+Predict the Average monthly electricity price in the U.S. state (TOTAL.PRICE)
+
+## Step 4: Baseline Model
