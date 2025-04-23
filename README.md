@@ -147,7 +147,7 @@ Looking at the handful of options I created, I decided to focus on regression. C
 ### Final Decision
 Predict the Average monthly electricity price in the U.S. state (TOTAL.PRICE)
 
-## Step 4: Baseline Model
+## Baseline Model
 
 The first thing I wanted to do when building a model was to make sure I preprocess all of my data given in my dataset. This let me to working on a pipeline that preprocessses all of the info before feeding it into the regression model. Since my data contains both numerical, categorical, and pd.Datetime datatypes, I will need to make sure I build my pipeline in such a way that all of this data is handled properly.
 
@@ -181,7 +181,7 @@ This is what my numerical preprocessor looks like:
  frameborder="0"
  ></iframe>
 
-For my categorical pipeline, I decided to use sklearn's SimpleImputer here, too, but this time to fill missing values with the most frequent value of each feature. Again, because this is a univariate SimpleImputer, it looks at each feature to fill the missing values with the most frequent value. I also uses
+For my categorical pipeline, I decided to use sklearn's SimpleImputer here, too, but this time to fill missing values with the most frequent value of each feature. Again, because this is a univariate SimpleImputer, it looks at each feature to fill the missing values with the most frequent value. I also used a onehotencoder so my categorical data can be used 
 
 This is what my categorical preprocessor looks like:
 
@@ -197,7 +197,7 @@ Combining the numerican and categorical preprocessor, inside a column transforme
 <iframe
  src="assets/htmls/baseline_preprocessing.html"
  width="600"
- height="150"
+ height="175"
  frameborder="0"
  ></iframe>
 
@@ -220,5 +220,76 @@ And here is the visualization of my model's peformance, using mean squared error
 |  0 | Baseline Model       | 25.4768  |
 |  1 | Tuned Baseline Model |  7.76278 |
 
+At this point, I thought that my model was quite alright. I was trying to be mindful of how I engineered my data, was careful of my imputations, and felt that I had built a complex model that did it's job well, and wasn't make complex just for the sake of having a large diagram. However, there were still some things I wanted to add to my model, and test, such as adding the Datetime features I built during the EDA in the beginning of this project. I also wanted to add some kind of regularization to combat any overfitting that I may do with my polynomial features transformer.
 
-## Step 5: Final Model
+## Final Model
+
+That leads to the work I spent making my final model. Here, my goals for attempting to improve my base model were quite simple:
+    1. Incorporate the Datetime features, 'OUTAGE.START' and 'OUTAGE.RESTORED'
+    2. Add Regularization to reduce overfitting
+    3. Tune the model after making these changes
+
+### Tangent - Trying Different Regression Models
+
+I want to make a side note that I had plans to test various other models beyond just Linear Regression and Lasso (for my regularization), such as SVM and random forest. I had written some hyperparameters I wanted to test, but they computationally very expensive, and made it nearly impossible to run the tests with my machine. This caused me to remove them from my scope of models and methods I would test to make my final model.
+
+Below are the tests that I was planning to run:
+```py
+from sklearn.linear_model import LinearRegression
+from sklearn.svm import SVR
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.model_selection import GridSearchCV
+from sklearn.linear_model import Lasso
+
+model_params = {
+    'svm': {
+        'model': SVR(gamma='auto'),
+        'params': {
+            'model__C': [1,10,20],
+            'model__kernel': ['rbf','linear']
+        }
+    },
+    'random_forest': {
+        'model': RandomForestRegressor(random_state=42),
+        'params': {
+            'model__n_estimators': [1,5,10]
+        }
+    },
+    'lasso': {
+        'model': Lasso(max_iter=10000, tol=0.001,random_state=42),
+        'params': {
+            'model__alpha': [0,0.5,1,10]
+        }
+    }
+}
+
+
+scores = []
+
+for model_name, mp in model_params.items():
+    pipe = Pipeline(
+        steps=[
+            ('preprocessing',preprocessing),
+            ("model",mp['model'])  
+        ]
+    )
+    reg = GridSearchCV(pipe,mp['params'], cv=5,return_train_score=False,n_jobs=-1,verbose=10)
+    reg.fit(X_train,y_train)
+    scores.append({
+        'model': model_name,
+        'best_score': reg.best_score_,
+        'beset_params': reg.best_params
+    })
+
+df = pd.DataFrame(scores,columns=['model','best_score','best_params'])
+```
+From there, I was planning to look at the dataframe and see which model had the best score using the score method from GridSearchCV, but again, this was computataionally too hard to run on my computer, so it had to be scrapped.
+
+Perhaps in the future, with more time, and learning how a bit of CUDA or other python modules that help split the workload onto a computers GPU and multiple processors, I'll come back to incorporate this into my final model decision.
+
+### Building the New Preprocessing Pipeline
+
+To make my final model better, I first need to go back to my preprocessing pipeline from before and add a datetime preprocessor to it.
+
+For my datetime preprocessor, I spent a lot of time thinking of unique features I could engineer from knowing the exact date and time of an outage starting and ending. Below are some of the ideas I thought of:   
+    - 
