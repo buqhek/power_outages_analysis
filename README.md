@@ -327,4 +327,42 @@ This is what my Datetime preprocessor looks like:
 
 ### Testing Models
 
-Before 
+Before utilizing the new processing pipeline, I wanted to make a lasso pipeline to regularize the model with just the numerical and categorical preprocessor. Below is what this model looks like:
+
+<iframe
+ src="assets/htmls/lasso_pipe.html"
+ width="600"
+ height="250"
+ frameborder="0"
+ ></iframe>
+
+Adding this lasso pipeline, and it's subsequently, it's tuned version to our overall list of models, we have:
+
+|    | Models               |      MSE |
+|---:|:---------------------|---------:|
+|  0 | Baseline Model       | 25.4768  |
+|  1 | Tuned Baseline Model |  7.76278 |
+|  2 | Lasso Model          |  5.75579 |
+|  3 | Tuned Lasso Model    |  4.07871 |
+
+However, we still have to build our final model, which is out preprocesssing 2.0 pipeline (including the Datetime pipeline), and a Lasso regression model:
+
+<iframe
+ src="assets/htmls/final_model_pipe.html"
+ width="700"
+ height="260"
+ frameborder="0"
+ ></iframe>
+
+ Tuning our final model yields better scores, with our full list of models that have been used for this project below:
+
+|    | Models               |      MSE |
+|---:|:---------------------|---------:|
+|  0 | Baseline Model       | 25.4768  |
+|  1 | Tuned Baseline Model |  7.76278 |
+|  2 | Lasso Model          |  5.75579 |
+|  3 | Tuned Lasso Model    |  4.07871 |
+|  4 | Final Model          |  5.75579 |
+|  5 | Tuned Final Model    |  4.05668 |
+|  6 | Lasso Model          |  5.75579 |
+|  7 | Tuned Lasso Model    |  4.07871 |
