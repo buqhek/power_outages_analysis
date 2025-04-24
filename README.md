@@ -39,6 +39,7 @@ An important piece of information about this dataset: total number of rows = 147
 
 **- Cause Category:** Cause of the power outage event.
 
+---
 
 ## **Data Cleaning **
 
@@ -60,6 +61,8 @@ These two new features are added to my working list of features from the outages
 | Minnesota    | MRO           | cold               | severe weather     |   2010 |      10 |              3000 |       5222116 |       2.5869e+06  |            -1.5 | 2010-10-26 20:00:00 | 2010-10-28 22:00:00 |          8.15 |
 | Minnesota    | MRO           | normal             | severe weather     |   2012 |       6 |              2550 |       5787064 |       2.60681e+06 |            -0.1 | 2012-06-19 04:30:00 | 2012-06-20 23:00:00 |          9.19 |
 | Minnesota    | MRO           | warm               | severe weather     |   2015 |       7 |              1740 |       5970339 |       2.67353e+06 |             1.2 | 2015-07-18 02:00:00 | 2015-07-19 07:00:00 |         10.43 |
+
+---
 
 ## **Exploratory Data Analysis**
 
@@ -125,6 +128,8 @@ An interesting observation is that the distribution of outages in this visualiza
 
 Continuing on the same vein as earlier, I created a choropleth map of the United States, visualizing the number of outages between the years of 2000 and 2016. The goal of this visualization was to see if there were certain regions that outages were more common in. As you can see, there **does not seem to be a clear focus of outages in certain NERC regions**, but there seems to be specifically a higher amount of outages in California, Texas, Michigan, and Washington.
 
+---
+
 ## **Framing a Prediction Problem**
 
 Looking having spent a lot of time looking at outage durations, I was sure I wanted to focus on that as a predictor for whatever type of regression or classification problem I wanted to look at. At this point, I had developed a short list of ideas I had:
@@ -146,6 +151,8 @@ Looking at the handful of options I created, I decided to focus on regression. C
 
 ### Final Decision
 Predict the Average monthly electricity price in the U.S. state (TOTAL.PRICE)
+
+---
 
 ## **Baseline Model**
 
@@ -215,12 +222,14 @@ However, I wanted to go a bit further tune the hyperparameter of the PolynomialF
 
 And here is the visualization of my model's peformance, using mean squared error (better means the closer the MSE is to zero):
 
-|    | Models               |      MSE |
-|---:|:---------------------|---------:|
-|  0 | Baseline Model       | 25.4768  |
-|  1 | Tuned Baseline Model |  7.76278 |
+| Models               |      MSE |
+|:---------------------|---------:|
+| Baseline Model       | 25.4768  |
+| Tuned Baseline Model |  7.76278 |
 
 At this point, I thought that my model was quite alright. I was trying to be mindful of how I engineered my data, was careful of my imputations, and felt that I had built a complex model that did it's job well, and wasn't make complex just for the sake of having a large diagram. However, there were still some things I wanted to add to my model, and test, such as adding the Datetime features I built during the EDA in the beginning of this project. I also wanted to add some kind of regularization to combat any overfitting that I may do with my polynomial features transformer.
+
+---
 
 ## **Final Model**
 
@@ -287,6 +296,8 @@ From there, I was planning to look at the dataframe and see which model had the 
 
 Perhaps in the future, with more time, and learning how a bit of CUDA or other python modules that help split the workload onto a computers GPU and multiple processors, I'll come back to incorporate this into my final model decision.
 
+---
+
 ### Building the New Preprocessing Pipeline
 
 To make my final model better, I first need to go back to my preprocessing pipeline from before and add a datetime preprocessor to it.
@@ -303,7 +314,9 @@ For my datetime preprocessor, I spent a lot of time thinking of unique features 
 
 - **Seasonal Indicators:** Splitting the months into different seasons, and checking when an outage starts according to that
 
-Ultimately, I built a function transformer that does all of this, and returns a dataframe containing all of this information. In addition to the function transformer, I also included a simple imputer that fills missing values with the mean. This was purposefully placed after the function transformer so that it could fill any possible missing values before the dataframe's information was passed into the actual regression function in the second part of the pipeline.
+Ultimately, I built a function transformer that does all of this, and returns a dataframe containing all of this information. The reason I found used all of them in particular was because in regards to predicting the average monthly electricity price in the U.S. state, binary features such as the different times of day and peak demand hours make it easier to create opportunities to draw patterns in the data, like realizing that if outages seem to start during business hours or mainly during weekdays, then prices will be lower since businesses will not pay a lot for electricity that isn't consistent. This sentiment continues for all of the business context, but also for the times of day, seasonal indicators, and basic temporal features. 
+
+Continuing, I also included a simple imputer to this pipeline that fills missing values with the mean. This was purposefully placed after the function transformer so that it could fill any possible missing values before the dataframe's information was passed into the actual regression function in the second part of the pipeline.
 
 This is what my Datetime preprocessor looks like:
 
@@ -336,33 +349,47 @@ Before utilizing the new processing pipeline, I wanted to make a lasso pipeline 
  frameborder="0"
  ></iframe>
 
-Adding this lasso pipeline, and it's subsequently, it's tuned version to our overall list of models, we have:
+Tuning this lasso pipeline yields the following values for our hyperparameters:
+- Alpha value of 0.1
+- Polynomial degree of 2 
 
-|    | Models               |      MSE |
-|---:|:---------------------|---------:|
-|  0 | Baseline Model       | 25.4768  |
-|  1 | Tuned Baseline Model |  7.76278 |
-|  2 | Lasso Model          |  5.75579 |
-|  3 | Tuned Lasso Model    |  4.07871 |
+| Models               |      MSE |
+|:---------------------|---------:|
+| Lasso Model          |  5.75579 |
+| Tuned Lasso Model    |  4.07871 |
+
 
 However, we still have to build our final model, which is out preprocesssing 2.0 pipeline (including the Datetime pipeline), and a Lasso regression model:
 
 <iframe
  src="assets/htmls/final_model_pipe.html"
- width="700"
- height="260"
+ width="750"
+ height="275"
  frameborder="0"
  ></iframe>
 
- Tuning our final model yields better scores, with our full list of models that have been used for this project below:
+Tuning our final model yields better scores yielded:
+- Alpha value of 0.1
+- Polynomial degree of 2
+ 
+With our newly tuned final model, we can add it to our list of models and their respective mean squared errors to evaluate the performance of each one!
 
-|    | Models               |      MSE |
-|---:|:---------------------|---------:|
-|  0 | Baseline Model       | 25.4768  |
-|  1 | Tuned Baseline Model |  7.76278 |
-|  2 | Lasso Model          |  5.75579 |
-|  3 | Tuned Lasso Model    |  4.07871 |
-|  4 | Final Model          |  5.75579 |
-|  5 | Tuned Final Model    |  4.05668 |
-|  6 | Lasso Model          |  5.75579 |
-|  7 | Tuned Lasso Model    |  4.07871 |
+| Models               |      MSE |
+|:---------------------|---------:|
+| Baseline Model       | 25.4768  |
+| Tuned Baseline Model |  7.76278 |
+| Lasso Model          |  5.75579 |
+| Tuned Lasso Model    |  4.07871 |
+| Final Model          |  5.75579 |
+| Tuned Final Model    |  4.05668 |
+
+Looking at the table above, we can look at various patterns within our models. For starters, we can see the importance of tuning the hyperparameters for each model based on how much the MSE differs from each base and tuned version of each model.
+
+More importantly we can look at each tuned version of the models we've built to see just how much the final model differs (in terms of performance) from the baseline version.
+
+Based on the MSE alone, we can tell that the final model is better than the baseline. By utilizing our engineered features `'OUTAGE.START'` and `'OUTAGE.RESTORED'`, we were able to extract various additional features that we were able to feed into our model. In addition to this, we also used `Lasso()` regression in combination with `PolynomialFeatures()` to not only look to see if we can find any non-linear trends in our data, but also make sure we don't overfit our model, using regularization. Combining all of this work, we were able to build a detailed final model!
+
+---
+
+## Extra Notes
+
