@@ -4,7 +4,7 @@
 
 First and foremost, I would like to acknowledge that this dataset was collected by Purdue University, located [here](https://engineering.purdue.edu/LASCI/research-data/outages). It contains various pieces of information about the climate, electricity consumption patterns, and other pieces of useful information regarding the power outages across the United States between the years 2000-2016. The main point of this analysis is to take a look at how the world around us impacts our lives in ways we might not really think about. 
 
-As a result, what makes this dataset and analysis very interesting seeing whether we can predict the monthly price (per kilowatt-hour) of our electricity, given a variety of parameters, like state, outage start and end time, month, year, etc...
+As a result, what makes this dataset and analysis very interesting is seeing whether we can predict the monthly price (per kilowatt-hour) of our electricity, given a variety of parameters, like state, outage start and end time, month, year, etc...
 
 An important piece of information about this dataset: total number of rows = 1476, and total number of columns = 54. However, we won't be using all columns, so don't worry about having to understand each feature that is present in this dataset.
 
@@ -20,13 +20,13 @@ An important piece of information about this dataset: total number of rows = 147
 
 **- Total Sales:** Total electricity consumption in the U.S. state (megawatt-hour).
 
-**- Total Customers:** 	Annual number of total customers served in the U.S. state.
+**- Total Customers:** Annual number of total customers served in the U.S. state.
 
 **- Anomaly Level:** This represents the oceanic El Niño/La Niña (ONI) index referring to the cold and warm episodes by season - essentially indicators for the environmental climate.
 
 #### <u>Categorical Columns:</u>
 
-**- US State:** The state in which the outage occurs in.
+**- US State:** The state in which the outage occurs.
 
 **- Nerc Region:** Regions in North America created by "The North American Electric Reliability Corporation" that were involved in the outage event.
 
@@ -35,18 +35,18 @@ An important piece of information about this dataset: total number of rows = 147
   <figcaption align="center"><em>Map of the NERC Regions of North America.</em></figcaption>
 </figure>
 
-**- Climate Category:** This represents the climate episodes corresponding to the years. The categories—“Warm”, “Cold” or “Normal” episodes of the climate are based on a threshold of ± 0.5 °C for the Oceanic Niño Index (ONI).
+**- Climate Category:** This represents the climate episodes corresponding to the years. The categories—"Warm", "Cold" or "Normal" episodes of the climate are based on a threshold of ± 0.5 °C for the Oceanic Niño Index (ONI).
 
 **- Cause Category:** Cause of the power outage event.
 
 ---
 
-## **Data Cleaning **
+## **Data Cleaning.**
 
-To start, one thing I wanted to do was to do some feature engineering by combining the time of day and time of the year/month/ to make a proper outage start time and outage restoration time - each containing the year, month, day, hour, minute, and second of the outage start and end. 
+To start, one thing I wanted to do was to do some feature engineering by combining the time of day and time of the year/month to make a proper outage start time and outage restoration time - each containing the year, month, day, hour, minute, and second of the outage start and end. 
 
 ### Imputation
-In order to do this, I identified the missing values in the outage start and end date, and chose to drop them from the dataset. This removed 9 rows from the 1476 starting amount, which was only 0.61% of the data, which is fine by me.
+In order to do this, I identified the missing values in the outage start and end dates, and chose to drop them from the dataset. This removed 9 rows from the 1476 starting amount, which was only 0.61% of the data, which is fine by me.
 
 ### Feature Engineering
 From there, I combined the features 'OUTAGE.START.DATE' and 'OUTAGE.START.TIME' to make 'OUTAGE.START' and combined 'OUTAGE.RESTORATION.DATE' and 'OUTAGE.RESTORATION.TIME' to make 'OUTAGE.RESTORED'.
@@ -66,7 +66,7 @@ These two new features are added to my working list of features from the outages
 
 ## **Exploratory Data Analysis**
 
-To start, I decided to investigate the outage durations on a monthly and yearly basis. Below is a table containing the total number of minutes in outage duration from each month between 2000-2016, with the total duration of outages summed to in the right-most column:
+To start, I decided to investigate the outage durations on a monthly and yearly basis. Below are tables containing the total number of minutes in outage duration from each month between 2000-2016, with the total duration of outages summed in the right-most column:
 
 Below is a table containing the **TOTAL duration of power outages on a "per month per year" basis (in hours)**:
 
@@ -103,7 +103,7 @@ And the **TOTAL duration of outages each year (in hours)**:
 |-------:|--------:|--------:|--------:|--------:|--------:|--------:|-------:|-------:|--------:|--------:|-------:|--------:|--------:|--------:|--------:|--------:|
 |    616 | 296.817 | 1108.57 | 3566.87 | 5169.73 | 4760.05 | 3662.48 |   2103 | 7670.7 | 4697.67 | 5189.63 | 8077.2 | 5414.83 | 3468.55 | 5386.08 | 1653.27 | 1566.05 |
 
-These tables allow us to look and identify any trends in the outages from the entirety of our population. For starters, I identified the year with the longest power outage durations to be 2011. This allowed me to focus on 2011 to see if I can identify any distributions or patterns in the data by looking at the largest sub-sample within my data.
+These tables allow us to examine trends in power outages across the entire dataset of U.S. power outages from 2000-2016, which constitutes our study population. For starters, I identified the year with the longest power outage durations to be 2011. This allowed me to focus on 2011 to see if I can identify any distributions or patterns in the data by looking at the largest sub-sample within my data.
 
 Below is a histogram showing the distribution of power outages on a monthly basis - a similar collection of data as our tables from earlier, but this time a bit more visual.
 
@@ -114,8 +114,8 @@ Below is a histogram showing the distribution of power outages on a monthly basi
     frameborder="0"
     
  >
- <figcaption align="center"><em>Graph of monthly power outages in 2011</em></figcaption>
  </iframe>
+ <figcaption align="center"><em>Graph of monthly power outages in 2011</em></figcaption>
 
 An interesting observation is that the distribution of outages in this visualization could possibly be normally distributed, or at least looks like it, with a peak reported number of outages in August of 2011.
 
@@ -125,14 +125,15 @@ An interesting observation is that the distribution of outages in this visualiza
  height="600"
  frameborder="0"
  ></iframe>
+ <figcaption align="center"><em>Choropleth map of US power outages (2000-2016)</em></figcaption>
 
-Continuing on the same vein as earlier, I created a choropleth map of the United States, visualizing the number of outages between the years of 2000 and 2016. The goal of this visualization was to see if there were certain regions that outages were more common in. As you can see, there **does not seem to be a clear focus of outages in certain NERC regions**, but there seems to be specifically a higher amount of outages in California, Texas, Michigan, and Washington.
+Continuing on the same vein as earlier, I created a choropleth map of the United States, visualizing the number of outages between the years of 2000 and 2016. The goal of this visualization was to see if there were certain regions where outages were more common. As you can see, there **does not seem to be a clear focus of outages in certain NERC regions**, but there seems to be specifically a higher amount of outages in California, Texas, Michigan, and Washington.
 
 ---
 
 ## **Framing a Prediction Problem**
 
-Looking having spent a lot of time looking at outage durations, I was sure I wanted to focus on that as a predictor for whatever type of regression or classification problem I wanted to look at. At this point, I had developed a short list of ideas I had:
+After spending a lot of time looking at outage durations, I was sure I wanted to focus on that as a predictor for whatever type of regression or classification problem I wanted to look at. At this point, I had developed a short list of ideas:
 
 
 ### Classification Ideas
@@ -147,16 +148,16 @@ Looking having spent a lot of time looking at outage durations, I was sure I wan
  
  ---
 
-Looking at the handful of options I created, I decided to focus on regression. Classification sounded very intersting, but with an interest in looking at the financial side of this dataset, I found myself more drawn to building a regression model. As a result, I chose to predict the average monthly electricity price in the U.S. state!
+Looking at the handful of options I created, I decided to focus on regression. Classification sounded very interesting, but with an interest in looking at the financial side of this dataset, I found myself more drawn to building a regression model. As a result, I chose to predict the average monthly electricity price in the U.S. state!
 
 ### Final Decision
-Predict the Average monthly electricity price in the U.S. state (TOTAL.PRICE)
+Predict the Average monthly electricity price in the U.S. state (`TOTAL.PRICE`)
 
 ---
 
 ## **Baseline Model**
 
-The first thing I wanted to do when building a model was to make sure I preprocess all of my data given in my dataset. This let me to working on a pipeline that preprocessses all of the info before feeding it into the regression model. Since my data contains both numerical, categorical, and `pd.Datetime` datatypes, I will need to make sure I build my pipeline in such a way that all of this data is handled properly.
+The first thing I wanted to do when building a model was to make sure I preprocess all of my data given in my dataset. This led me to working on a pipeline that preprocesses all of the info before feeding it into the regression model. Since my data contains both numerical, categorical, and `pd.Datetime` datatypes, I will need to make sure I build my pipeline in such a way that all of this data is handled properly.
 
 As a refresher, here are the features that are each datatype:
 
@@ -188,7 +189,7 @@ This is what my numerical preprocessor looks like:
  frameborder="0"
  ></iframe>
 
-For my categorical pipeline, I decided to use sklearn's `SimpleImputer` here, too, but this time to fill missing values with the most frequent value of each feature. Again, because this is a univariate `SimpleImputer`, it looks at each feature to fill the missing values with the most frequent value. I also used a onehotencoder so my categorical data can be used 
+For my categorical pipeline, I decided to use sklearn's `SimpleImputer()` here, too, but this time to fill missing values with the most frequent value of each feature. Again, because this is a univariate `SimpleImputer()`, it looks at each feature to fill the missing values with the most frequent value. I also used a onehotencoder so my categorical data can be used.
 
 This is what my categorical preprocessor looks like:
 
@@ -199,7 +200,7 @@ This is what my categorical preprocessor looks like:
  frameborder="0"
  ></iframe>
 
-Combining the numerican and categorical preprocessor, inside a column transformer, this is what the finished baseline preprocessor looks like:
+Combining the numerical and categorical preprocessor, inside a column transformer, this is what the finished baseline preprocessor looks like:
 
 <iframe
  src="assets/htmls/baseline_preprocessing.html"
@@ -218,16 +219,16 @@ Combining the numerican and categorical preprocessor, inside a column transforme
  frameborder="0"
  ></iframe>
 
-However, I wanted to go a bit further tune the hyperparameter of the `PolynomialFeatures` degree for my basemodel. I did this utilizing sklearn's GridSearchCV, where I found that for my basemodel, a degree of 1 is actually the best, meaning that it essentially makes my model ignore the polynomialfeatures transformer, which I think is quite funny.
+However, I wanted to go a bit further and tune the hyperparameter of the `PolynomialFeatures()` degree for my basemodel. I did this utilizing sklearn's `GridSearchCV()`, where I found that for my basemodel, a degree of 1 is actually the best, meaning that it essentially makes my model ignore the polynomialfeatures transformer, which I think is quite funny.
 
-And here is the visualization of my model's peformance, using mean squared error (better means the closer the MSE is to zero):
+Below is a comparison of model performance using Mean Squared Error (MSE). A lower MSE indicates better predictive accuracy, with values closer to zero representing smaller average prediction errors. This metric was chosen because it penalizes larger errors more heavily, which is important when predicting electricity prices where significant deviations could have meaningful economic impacts:
 
 | Models               |      MSE |
 |:---------------------|---------:|
 | Baseline Model       | 25.4768  |
 | Tuned Baseline Model |  7.76278 |
 
-At this point, I thought that my model was quite alright. I was trying to be mindful of how I engineered my data, was careful of my imputations, and felt that I had built a complex model that did it's job well, and wasn't make complex just for the sake of having a large diagram. However, there were still some things I wanted to add to my model, and test, such as adding the Datetime features I built during the EDA in the beginning of this project. I also wanted to add some kind of regularization to combat any overfitting that I may do with my polynomial features transformer.
+At this point, I thought that my model was quite alright. I was trying to be mindful of how I engineered my data, was careful of my imputations, and felt that I had built a complex model that did its job well, and wasn't made complex just for the sake of having a large diagram. However, there were still some things I wanted to add to my model, and test, such as adding the Datetime features I built during the EDA in the beginning of this project. I also wanted to add some kind of regularization to combat any overfitting that may occur with my polynomial features transformer.
 
 ---
 
@@ -238,9 +239,119 @@ That leads to the work I spent making my final model. Here, my goals for attempt
     2. Add Regularization to reduce overfitting
     3. Tune the model after making these changes
 
-### Tangent - Trying Different Regression Models
+In selecting the optimal approach, I considered various regression models including SVM and Random Forest. Due to computational constraints, I narrowed my focus to Linear Regression and Lasso (detailed in Appendix A).
 
-I want to make a side note that I had plans to test various other models beyond just Linear Regression and Lasso (for my regularization), such as `SVM` and `random_forest`. I had written some hyperparameters I wanted to test, but they computationally very expensive, and made it nearly impossible to run the tests with my machine. This caused me to remove them from my scope of models and methods I would test to make my final model.
+### Building the New Preprocessing Pipeline
+
+To make my final model better, I first need to go back to my preprocessing pipeline from before and add a datetime preprocessor to it.
+
+For my datetime preprocessor, I spent a lot of time thinking of unique features I could engineer from knowing the exact date and time of an outage starting and ending. Below are some of the ideas I thought of:   
+
+- **Basic Temporal Features:** Building features for the day, month, hour, day of week (like Monday or Wednesday), or fiscal quarter.
+
+- **Basic Business Context:** Building binary features that check if the outages start on a weekend, or during business hours.
+
+- **Different Times of Day:** Required splitting up the 24 hours of a day as morning, afternoon, evening, and night, and seeing when an outage starts according to that (Binary Feature).
+
+- **Peak Demand Hours:** Checking if an outage starts during business peak demand hours, which I labeled as being between 4-8pm.
+
+- **Seasonal Indicators:** Splitting the months into different seasons, and checking when an outage starts according to that.
+
+Ultimately, I built a function transformer that does all of this, and returns a dataframe containing all of this information. The reason I used all of them in particular was because in regards to predicting the average monthly electricity price in the U.S. state, binary features such as the different times of day and peak demand hours make it easier to create opportunities to draw patterns in the data, like realizing that if outages seem to start during business hours or mainly during weekdays, then prices will be lower since businesses will not pay a lot for electricity that isn't consistent. This sentiment continues for all of the business context, but also for the times of day, seasonal indicators, and basic temporal features. 
+
+Continuing, I also included a simple imputer to this pipeline that fills missing values with the mean. This was purposefully placed after the function transformer so that it could fill any possible missing values before the dataframe's information was passed into the actual regression function in the second part of the pipeline.
+
+This is what my Datetime preprocessor looks like:
+
+<iframe
+ src="assets/htmls/datetime_preprocessing.html"
+ width="325"
+ height="150"
+ frameborder="0"
+ ></iframe>
+
+ ---
+
+ As a result, my new final preprocessing function (including this new Datetime processor) looks like this:
+ 
+<iframe
+ src="assets/htmls/final_preprocessing.html"
+ width="700"
+ height="210"
+ frameborder="0"
+ ></iframe>
+
+### Testing Models
+
+Before utilizing the new processing pipeline, I wanted to make a lasso pipeline to regularize the model with just the numerical and categorical preprocessor. Below is what this model looks like:
+
+<iframe
+ src="assets/htmls/lasso_pipe.html"
+ width="600"
+ height="250"
+ frameborder="0"
+ ></iframe>
+
+Tuning this lasso pipeline yields the following values for our hyperparameters:
+- Alpha value of 0.1
+- Polynomial degree of 2 
+
+| Models               |      MSE |
+|:---------------------|---------:|
+| Lasso Model          |  5.75579 |
+| Tuned Lasso Model    |  4.07871 |
+
+
+However, we still have to build our final model, which is our preprocessing 2.0 pipeline (including the Datetime pipeline), and a Lasso regression model:
+
+<iframe
+ src="assets/htmls/final_model_pipe.html"
+ width="750"
+ height="290"
+ frameborder="0"
+ ></iframe>
+
+Tuning our final model yields:
+- Alpha value of 0.1
+- Polynomial degree of 2
+ 
+With our newly tuned final model, we can add it to our list of models and their respective mean squared errors to evaluate the performance of each one!
+
+| Models               |      MSE |
+|:---------------------|---------:|
+| Baseline Model       | 25.4768  |
+| Tuned Baseline Model |  7.76278 |
+| Lasso Model          |  5.75579 |
+| Tuned Lasso Model    |  4.07871 |
+| Final Model          |  5.75579 |
+| Tuned Final Model    |  4.05668 |
+
+Looking at the table above, we can look at various patterns within our models. For starters, we can see the importance of tuning the hyperparameters for each model based on how much the MSE differs from each base and tuned version of each model.
+
+More importantly we can look at each tuned version of the models we've built to see just how much the final model differs (in terms of performance) from the baseline version.
+
+Based on the MSE alone, we can tell that the final model is better than the baseline. By utilizing our engineered features `'OUTAGE.START'` and `'OUTAGE.RESTORED'`, we were able to extract various additional features that we were able to feed into our model. In addition to this, we also used `Lasso()` regression in combination with `PolynomialFeatures()` to not only look to see if we can find any non-linear trends in our data, but also make sure we don't overfit our model, using regularization. Combining all of this work, we were able to build a detailed final model!
+
+---
+
+## **Conclusion**
+
+This analysis demonstrates that power outage data can indeed contribute to predicting monthly electricity prices. Through progressive model refinement from our baseline to the final regularized model incorporating temporal features, we achieved a significant reduction in prediction error, with MSE improving from 25.48 to 4.06.
+
+The most substantial improvements came from:
+1. Proper hyperparameter tuning
+2. Applying Lasso regularization to prevent overfitting
+3. Adding engineered datetime features, though with modest gains
+
+These findings suggest that while power outage patterns do correlate with electricity pricing, the relationship may be less pronounced than initially hypothesized. Future work could explore additional external factors such as fuel costs, regulatory changes, and infrastructure investments that might provide stronger predictive signals.
+
+In practice, this model could help utilities and consumers anticipate price fluctuations based on outage patterns, potentially informing energy policy and infrastructure investment decisions.
+
+---
+
+## **Appendix A: Alternative Models Considered**
+
+I originally planned to test various other models beyond just Linear Regression and Lasso, such as `SVM` and `random_forest`. I had written some hyperparameters I wanted to test, but they were computationally very expensive, and made it nearly impossible to run the tests with my machine. This caused me to remove them from my scope of models and methods I would test to make my final model.
 
 Below are the tests that I was planning to run:
 ```py
@@ -292,106 +403,11 @@ for model_name, mp in model_params.items():
 
 df = pd.DataFrame(scores,columns=['model','best_score','best_params'])
 ```
-From there, I was planning to look at the dataframe and see which model had the best score using the score method from GridSearchCV, but again, this was computataionally too hard to run on my computer, so it had to be scrapped.
+From there, I was planning to look at the dataframe and see which model had the best score using the score method from GridSearchCV, but again, this was computationally too hard to run on my computer, so it had to be scrapped.
 
-Perhaps in the future, with more time, and learning how a bit of `CUDA` or other python modules that help split the workload onto a computers GPU and multiple processors, I'll come back to incorporate this into my final model decision.
+Perhaps in the future, with more time, and learning a bit of `CUDA` or other Python modules that help split the workload onto a computer's GPU and multiple processors, I'll come back to incorporate this into my final model decision.
 
----
-
-### Building the New Preprocessing Pipeline
-
-To make my final model better, I first need to go back to my preprocessing pipeline from before and add a datetime preprocessor to it.
-
-For my datetime preprocessor, I spent a lot of time thinking of unique features I could engineer from knowing the exact date and time of an outage starting and ending. Below are some of the ideas I thought of:   
-
-- **Basic Temporal Features:** Building features for the day, month, hour, day of week (like Monday or Wednesday), or fiscal quarter.
-
-- **Basic Business Context** Building binary features that checks if the outages starts on a weekend, or during business hours.
-
-- **Different Times of Day:** Required splitting up the 24 hours of a day as morning, afternoon, evening, and night, and seeing when an outage starts according to that (Binary Feature).
-
-- **Peak Demand Hours:** Checking if an outage starts during business peak demand hours, which I labeled as being between 4-8pm.
-
-- **Seasonal Indicators:** Splitting the months into different seasons, and checking when an outage starts according to that
-
-Ultimately, I built a function transformer that does all of this, and returns a dataframe containing all of this information. The reason I found used all of them in particular was because in regards to predicting the average monthly electricity price in the U.S. state, binary features such as the different times of day and peak demand hours make it easier to create opportunities to draw patterns in the data, like realizing that if outages seem to start during business hours or mainly during weekdays, then prices will be lower since businesses will not pay a lot for electricity that isn't consistent. This sentiment continues for all of the business context, but also for the times of day, seasonal indicators, and basic temporal features. 
-
-Continuing, I also included a simple imputer to this pipeline that fills missing values with the mean. This was purposefully placed after the function transformer so that it could fill any possible missing values before the dataframe's information was passed into the actual regression function in the second part of the pipeline.
-
-This is what my Datetime preprocessor looks like:
-
-<iframe
- src="assets/htmls/datetime_preprocessing.html"
- width="325"
- height="150"
- frameborder="0"
- ></iframe>
-
- ---
-
- As a result, my new final preprocessing function (including this new Datetime processor) looks like this:
- 
-<iframe
- src="assets/htmls/final_preprocessing.html"
- width="700"
- height="210"
- frameborder="0"
- ></iframe>
-
-### Testing Models
-
-Before utilizing the new processing pipeline, I wanted to make a lasso pipeline to regularize the model with just the numerical and categorical preprocessor. Below is what this model looks like:
-
-<iframe
- src="assets/htmls/lasso_pipe.html"
- width="600"
- height="250"
- frameborder="0"
- ></iframe>
-
-Tuning this lasso pipeline yields the following values for our hyperparameters:
-- Alpha value of 0.1
-- Polynomial degree of 2 
-
-| Models               |      MSE |
-|:---------------------|---------:|
-| Lasso Model          |  5.75579 |
-| Tuned Lasso Model    |  4.07871 |
-
-
-However, we still have to build our final model, which is out preprocesssing 2.0 pipeline (including the Datetime pipeline), and a Lasso regression model:
-
-<iframe
- src="assets/htmls/final_model_pipe.html"
- width="750"
- height="290"
- frameborder="0"
- ></iframe>
-
-Tuning our final model yields better scores yielded:
-- Alpha value of 0.1
-- Polynomial degree of 2
- 
-With our newly tuned final model, we can add it to our list of models and their respective mean squared errors to evaluate the performance of each one!
-
-| Models               |      MSE |
-|:---------------------|---------:|
-| Baseline Model       | 25.4768  |
-| Tuned Baseline Model |  7.76278 |
-| Lasso Model          |  5.75579 |
-| Tuned Lasso Model    |  4.07871 |
-| Final Model          |  5.75579 |
-| Tuned Final Model    |  4.05668 |
-
-Looking at the table above, we can look at various patterns within our models. For starters, we can see the importance of tuning the hyperparameters for each model based on how much the MSE differs from each base and tuned version of each model.
-
-More importantly we can look at each tuned version of the models we've built to see just how much the final model differs (in terms of performance) from the baseline version.
-
-Based on the MSE alone, we can tell that the final model is better than the baseline. By utilizing our engineered features `'OUTAGE.START'` and `'OUTAGE.RESTORED'`, we were able to extract various additional features that we were able to feed into our model. In addition to this, we also used `Lasso()` regression in combination with `PolynomialFeatures()` to not only look to see if we can find any non-linear trends in our data, but also make sure we don't overfit our model, using regularization. Combining all of this work, we were able to build a detailed final model!
-
----
-
-## Extra Notes
+## **Extra Notes**
 
 One note I made when evaluating each model was comparing the MSEs of the <ins>Tuned Lasso Model</ins> with the <ins>Tuned Final Model</ins>. I noticed that according to my choice of performance evaluation, the tuned final model was only the *slightest* bit better than the lasso model that didn't have the Datetime features preprocessor as well. 
 
@@ -399,4 +415,4 @@ In particular, the addition of the DateTime preprocessor only decreased the MSE 
 
 Additionally, the tuned lasso and tuned final model both had the exact same hyperparameters. One thing I would like to do in the future would be to run more extensive tests on the alpha hyperparameter in lasso regression, since 0.1 was the smallest I had, with the followup value being 1 and then 10. 
 
-Overall, while this work was very fun and intruiging, I wish to be able to revisit it again with more depth to my testing. Running into computational limits when using `GridSearchCV()` was very frustrating, and limited my testing qutie a bit.
+Overall, while this work was very fun and intriguing, I wish to be able to revisit it again with more depth to my testing. Running into computational limits when using `GridSearchCV()` was very frustrating, and limited my testing quite a bit.
