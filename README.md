@@ -274,8 +274,6 @@ This is what my Datetime preprocessor looks like:
  frameborder="0"
  ></iframe>
 
- ---
-
  As a result, my new final preprocessing function (including this new Datetime processor) looks like this:
  
 <iframe
