@@ -156,7 +156,7 @@ Predict the Average monthly electricity price in the U.S. state (TOTAL.PRICE)
 
 ## **Baseline Model**
 
-The first thing I wanted to do when building a model was to make sure I preprocess all of my data given in my dataset. This let me to working on a pipeline that preprocessses all of the info before feeding it into the regression model. Since my data contains both numerical, categorical, and pd.Datetime datatypes, I will need to make sure I build my pipeline in such a way that all of this data is handled properly.
+The first thing I wanted to do when building a model was to make sure I preprocess all of my data given in my dataset. This let me to working on a pipeline that preprocessses all of the info before feeding it into the regression model. Since my data contains both numerical, categorical, and `pd.Datetime` datatypes, I will need to make sure I build my pipeline in such a way that all of this data is handled properly.
 
 As a refresher, here are the features that are each datatype:
 
@@ -177,7 +177,7 @@ However, for my base model, I only wanted to use the categorical and numerical f
 
 ### Building the Preprocessing Pipeline
 
-For my numerical pipeline, I decided to use sklearn's SimpleImputer to fill in any missing values in my data by taking the mean and using that to fill values. Sklearn's SimpleImputer does this by using univariate imputation, meaning it only uses the feature that the missing value is in to compute the mean, leading to a more complete dataset, but being susceptible to outliers. Additionally, I also added a PolynomialFeatures transformer to help capture any non-linear relationships, which can help improve the model performance. I set the degree for the polynomial features to 2 as a start - it'll be a hyperparameter that I later tweak when I am testing different models.
+For my numerical pipeline, I decided to use sklearn's `SimpleImputer()` to fill in any missing values in my data by taking the mean and using that to fill values. Sklearn's `SimpleImputer()` does this by using univariate imputation, meaning it only uses the feature that the missing value is in to compute the mean, leading to a more complete dataset, but being susceptible to outliers. Additionally, I also added a `PolynomialFeatures()` transformer to help capture any non-linear relationships, which can help improve the model performance. I set the degree for the polynomial features to 2 as a start - it'll be a hyperparameter that I later tweak when I am testing different models.
 
 This is what my numerical preprocessor looks like:
 
@@ -188,7 +188,7 @@ This is what my numerical preprocessor looks like:
  frameborder="0"
  ></iframe>
 
-For my categorical pipeline, I decided to use sklearn's SimpleImputer here, too, but this time to fill missing values with the most frequent value of each feature. Again, because this is a univariate SimpleImputer, it looks at each feature to fill the missing values with the most frequent value. I also used a onehotencoder so my categorical data can be used 
+For my categorical pipeline, I decided to use sklearn's `SimpleImputer` here, too, but this time to fill missing values with the most frequent value of each feature. Again, because this is a univariate `SimpleImputer`, it looks at each feature to fill the missing values with the most frequent value. I also used a onehotencoder so my categorical data can be used 
 
 This is what my categorical preprocessor looks like:
 
@@ -218,7 +218,7 @@ Combining the numerican and categorical preprocessor, inside a column transforme
  frameborder="0"
  ></iframe>
 
-However, I wanted to go a bit further tune the hyperparameter of the PolynomialFeatures degree for my basemodel. I did this utilizing sklearn's GridSearchCV, where I found that for my basemodel, a degree of 1 is actually the best, meaning that it essentially makes my model ignore the polynomialfeatures transformer, which I think is quite funny.
+However, I wanted to go a bit further tune the hyperparameter of the `PolynomialFeatures` degree for my basemodel. I did this utilizing sklearn's GridSearchCV, where I found that for my basemodel, a degree of 1 is actually the best, meaning that it essentially makes my model ignore the polynomialfeatures transformer, which I think is quite funny.
 
 And here is the visualization of my model's peformance, using mean squared error (better means the closer the MSE is to zero):
 
@@ -234,13 +234,13 @@ At this point, I thought that my model was quite alright. I was trying to be min
 ## **Final Model**
 
 That leads to the work I spent making my final model. Here, my goals for attempting to improve my base model were quite simple:
-    1. Incorporate the Datetime features, 'OUTAGE.START' and 'OUTAGE.RESTORED'
+    1. Incorporate the Datetime features, `'OUTAGE.START'` and `'OUTAGE.RESTORED'`
     2. Add Regularization to reduce overfitting
     3. Tune the model after making these changes
 
 ### Tangent - Trying Different Regression Models
 
-I want to make a side note that I had plans to test various other models beyond just Linear Regression and Lasso (for my regularization), such as SVM and random forest. I had written some hyperparameters I wanted to test, but they computationally very expensive, and made it nearly impossible to run the tests with my machine. This caused me to remove them from my scope of models and methods I would test to make my final model.
+I want to make a side note that I had plans to test various other models beyond just Linear Regression and Lasso (for my regularization), such as `SVM` and `random_forest`. I had written some hyperparameters I wanted to test, but they computationally very expensive, and made it nearly impossible to run the tests with my machine. This caused me to remove them from my scope of models and methods I would test to make my final model.
 
 Below are the tests that I was planning to run:
 ```py
@@ -294,7 +294,7 @@ df = pd.DataFrame(scores,columns=['model','best_score','best_params'])
 ```
 From there, I was planning to look at the dataframe and see which model had the best score using the score method from GridSearchCV, but again, this was computataionally too hard to run on my computer, so it had to be scrapped.
 
-Perhaps in the future, with more time, and learning how a bit of CUDA or other python modules that help split the workload onto a computers GPU and multiple processors, I'll come back to incorporate this into my final model decision.
+Perhaps in the future, with more time, and learning how a bit of `CUDA` or other python modules that help split the workload onto a computers GPU and multiple processors, I'll come back to incorporate this into my final model decision.
 
 ---
 
@@ -304,7 +304,7 @@ To make my final model better, I first need to go back to my preprocessing pipel
 
 For my datetime preprocessor, I spent a lot of time thinking of unique features I could engineer from knowing the exact date and time of an outage starting and ending. Below are some of the ideas I thought of:   
 
-- **Basic Temporal Features:** Building featurs for the day, month, hour, day of week (like Monday or Wednesday), or fiscal quarter.
+- **Basic Temporal Features:** Building features for the day, month, hour, day of week (like Monday or Wednesday), or fiscal quarter.
 
 - **Basic Business Context** Building binary features that checks if the outages starts on a weekend, or during business hours.
 
@@ -364,7 +364,7 @@ However, we still have to build our final model, which is out preprocesssing 2.0
 <iframe
  src="assets/htmls/final_model_pipe.html"
  width="750"
- height="275"
+ height="290"
  frameborder="0"
  ></iframe>
 
@@ -393,3 +393,10 @@ Based on the MSE alone, we can tell that the final model is better than the base
 
 ## Extra Notes
 
+One note I made when evaluating each model was comparing the MSEs of the <ins>Tuned Lasso Model</ins> with the <ins>Tuned Final Model</ins>. I noticed that according to my choice of performance evaluation, the tuned final model was only the *slightest* bit better than the lasso model that didn't have the Datetime features preprocessor as well. 
+
+In particular, the addition of the DateTime preprocessor only decreased the MSE by 0.02203, which doesn't feel like a lot. This makes me think that the information extracted from the DateTime preprocessor wasn't that useful for predicting `'TOTAL.PRICE'`.
+
+Additionally, the tuned lasso and tuned final model both had the exact same hyperparameters. One thing I would like to do in the future would be to run more extensive tests on the alpha hyperparameter in lasso regression, since 0.1 was the smallest I had, with the followup value being 1 and then 10. 
+
+Overall, while this work was very fun and intruiging, I wish to be able to revisit it again with more depth to my testing. Running into computational limits when using `GridSearchCV()` was very frustrating, and limited my testing qutie a bit.
