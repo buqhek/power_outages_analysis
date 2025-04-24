@@ -41,7 +41,7 @@ An important piece of information about this dataset: total number of rows = 147
 
 ---
 
-## **Data Cleaning.**
+## **Data Cleaning**
 
 To start, one thing I wanted to do was to do some feature engineering by combining the time of day and time of the year/month to make a proper outage start time and outage restoration time - each containing the year, month, day, hour, minute, and second of the outage start and end. 
 
@@ -49,7 +49,9 @@ To start, one thing I wanted to do was to do some feature engineering by combini
 In order to do this, I identified the missing values in the outage start and end dates, and chose to drop them from the dataset. This removed 9 rows from the 1476 starting amount, which was only 0.61% of the data, which is fine by me.
 
 ### Feature Engineering
-From there, I combined the features 'OUTAGE.START.DATE' and 'OUTAGE.START.TIME' to make 'OUTAGE.START' and combined 'OUTAGE.RESTORATION.DATE' and 'OUTAGE.RESTORATION.TIME' to make 'OUTAGE.RESTORED'.
+From there, I combined the features `'OUTAGE.START.DATE'` and `'OUTAGE.START.TIME'` to make `'OUTAGE.START'`. 
+
+I also combined `'OUTAGE.RESTORATION.DATE'` and `'OUTAGE.RESTORATION.TIME'` to make `'OUTAGE.RESTORED'`.
 
 These two new features are added to my working list of features from the outages dataset to get a subset that looks something like this:
 
@@ -66,7 +68,7 @@ These two new features are added to my working list of features from the outages
 
 ## **Exploratory Data Analysis**
 
-To start, I decided to investigate the outage durations on a monthly and yearly basis. Below are tables containing the total number of minutes in outage duration from each month between 2000-2016, with the total duration of outages summed in the right-most column:
+To start, I decided to investigate the outage durations on a monthly and yearly basis. Below are tables containing the total number of minutes in outage duration from each month between 2000-2016:
 
 Below is a table containing the **TOTAL duration of power outages on a "per month per year" basis (in hours)**:
 
@@ -119,6 +121,8 @@ Below is a histogram showing the distribution of power outages on a monthly basi
 
 An interesting observation is that the distribution of outages in this visualization could possibly be normally distributed, or at least looks like it, with a peak reported number of outages in August of 2011.
 
+Below is a choropleth map of the United States, visualizing the number of outages between the years of 2000 and 2016.
+
  <iframe
  src="assets/htmls/map.html"
  width="800"
@@ -127,7 +131,7 @@ An interesting observation is that the distribution of outages in this visualiza
  ></iframe>
  <figcaption align="center"><em>Choropleth map of US power outages (2000-2016)</em></figcaption>
 
-Continuing on the same vein as earlier, I created a choropleth map of the United States, visualizing the number of outages between the years of 2000 and 2016. The goal of this visualization was to see if there were certain regions where outages were more common. As you can see, there **does not seem to be a clear focus of outages in certain NERC regions**, but there seems to be specifically a higher amount of outages in California, Texas, Michigan, and Washington.
+The goal of this visualization was to see if there were certain regions where outages were more common. As you can see, there **does not seem to be a clear focus of outages in certain NERC regions**, but there seems to be specifically a higher amount of outages in California, Texas, Michigan, and Washington.
 
 ---
 
@@ -162,19 +166,19 @@ The first thing I wanted to do when building a model was to make sure I preproce
 As a refresher, here are the features that are each datatype:
 
 #### Categorical
-- 'U.S._STATE','NERC.REGION','CLIMATE.CATEGORY','CAUSE.CATEGORY'
+- `'U.S._STATE','NERC.REGION','CLIMATE.CATEGORY','CAUSE.CATEGORY'`
 
 - **Special note:** all of the categorical features that I am using is nominal, meaning that there is no inherent order in the categories that I have listed
 
 #### Numerical
-'YEAR', 'MONTH','OUTAGE.DURATION','TOTAL.SALES','TOTAL.CUSTOMERS','ANOMALY.LEVEL'
+`'YEAR', 'MONTH','OUTAGE.DURATION','TOTAL.SALES','TOTAL.CUSTOMERS','ANOMALY.LEVEL'`
 
 #### Datetime
-'OUTAGE.START', 'OUTAGE.RESTORED'
+`'OUTAGE.START', 'OUTAGE.RESTORED'`
 
 ---
 
-However, for my base model, I only wanted to use the categorical and numerical features to predict 'TOTAL.SALES'. 
+However, for my base model, I only wanted to use the categorical and numerical features to predict `'TOTAL.SALES'`. 
 
 ### Building the Preprocessing Pipeline
 
@@ -235,9 +239,9 @@ At this point, I thought that my model was quite alright. I was trying to be min
 ## **Final Model**
 
 That leads to the work I spent making my final model. Here, my goals for attempting to improve my base model were quite simple:
-    1. Incorporate the Datetime features, `'OUTAGE.START'` and `'OUTAGE.RESTORED'`
-    2. Add Regularization to reduce overfitting
-    3. Tune the model after making these changes
+1. Incorporate the Datetime features, `'OUTAGE.START'` and `'OUTAGE.RESTORED'`
+2. Add Regularization to reduce overfitting
+3. Tune the model after making these changes
 
 In selecting the optimal approach, I considered various regression models including SVM and Random Forest. Due to computational constraints, I narrowed my focus to Linear Regression and Lasso (detailed in Appendix A).
 
