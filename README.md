@@ -111,7 +111,7 @@ Below is a histogram showing the distribution of power outages on a monthly basi
 
  <iframe
     src="assets/htmls/hist.html"
-    width="800"
+    width"800"800"
     height="600"
     frameborder="0"
     
@@ -125,7 +125,7 @@ Below is a choropleth map of the United States, visualizing the number of outage
 
  <iframe
  src="assets/htmls/map.html"
- width="800"
+ width"800"800"
  height="600"
  frameborder="0"
  ></iframe>
@@ -188,7 +188,7 @@ This is what my numerical preprocessor looks like:
 
 <iframe
  src="assets/htmls/numerical_preprocessing.html"
- width="325"
+ width"800"700"
  height="150"
  frameborder="0"
  ></iframe>
@@ -199,7 +199,7 @@ This is what my categorical preprocessor looks like:
 
 <iframe
  src="assets/htmls/categorical_prepocessing.html"
- width="325"
+ width="800"
  height="150"
  frameborder="0"
  ></iframe>
@@ -208,7 +208,7 @@ Combining the numerical and categorical preprocessor, inside a column transforme
 
 <iframe
  src="assets/htmls/baseline_preprocessing.html"
- width="600"
+ width="800"
  height="175"
  frameborder="0"
  ></iframe>
@@ -218,7 +218,7 @@ Combining the numerical and categorical preprocessor, inside a column transforme
  From there, I built my baseline model using sklearn's Linear Regression model:
  <iframe
  src="assets/htmls/base_model.html"
- width="600"
+ width="800"
  height="250"
  frameborder="0"
  ></iframe>
@@ -269,7 +269,7 @@ This is what my Datetime preprocessor looks like:
 
 <iframe
  src="assets/htmls/datetime_preprocessing.html"
- width="325"
+ width="800"
  height="150"
  frameborder="0"
  ></iframe>
@@ -278,7 +278,7 @@ This is what my Datetime preprocessor looks like:
  
 <iframe
  src="assets/htmls/final_preprocessing.html"
- width="700"
+ width="800"
  height="210"
  frameborder="0"
  ></iframe>
@@ -289,7 +289,7 @@ Before utilizing the new processing pipeline, I wanted to make a lasso pipeline 
 
 <iframe
  src="assets/htmls/lasso_pipe.html"
- width="600"
+ width="800"
  height="250"
  frameborder="0"
  ></iframe>
@@ -308,7 +308,7 @@ However, we still have to build our final model, which is our preprocessing 2.0 
 
 <iframe
  src="assets/htmls/final_model_pipe.html"
- width="750"
+ width="800"
  height="290"
  frameborder="0"
  ></iframe>
