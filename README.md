@@ -148,7 +148,7 @@ After spending a lot of time looking at outage durations, I was sure I wanted to
 
 ### Regression Ideas
 - Predict the Oceanic Niño Index (ONI) -- or ANOMALY.LEVEL based on the number of customers, start/end date, etc...
-- Predict the Average monthly electricity price in the U.S. state (TOTAL.PRICE)
+- Predict the Average monthly electricity price in the U.S. state (`TOTAL.PRICE`)
  
  ---
 
@@ -171,10 +171,10 @@ As a refresher, here are the features that are each datatype:
 - **Special note:** all of the categorical features that I am using is nominal, meaning that there is no inherent order in the categories that I have listed
 
 #### Numerical
-`'YEAR', 'MONTH','OUTAGE.DURATION','TOTAL.SALES','TOTAL.CUSTOMERS','ANOMALY.LEVEL'`
+- `'YEAR', 'MONTH','OUTAGE.DURATION','TOTAL.SALES','TOTAL.CUSTOMERS','ANOMALY.LEVEL'`
 
 #### Datetime
-`'OUTAGE.START', 'OUTAGE.RESTORED'`
+- `'OUTAGE.START', 'OUTAGE.RESTORED'`
 
 ---
 
@@ -193,7 +193,7 @@ This is what my numerical preprocessor looks like:
  frameborder="0"
  ></iframe>
 
-For my categorical pipeline, I decided to use sklearn's `SimpleImputer()` here, too, but this time to fill missing values with the most frequent value of each feature. Again, because this is a univariate `SimpleImputer()`, it looks at each feature to fill the missing values with the most frequent value. I also used a onehotencoder so my categorical data can be used.
+For my categorical pipeline, I decided to use sklearn's `SimpleImputer()` here, too, but this time to fill missing values with the most frequent value of each feature. Again, because this is a univariate `SimpleImputer()`, it looks at each feature to fill the missing values with the most frequent value. I also used a `OneHotEncoder()` so my categorical data can be used by transforming each feature passed through my one hot encoder to become a series of binary columns -- essentially making the data able for the model to interpret. Some special settings I used was setting `drop=True`, which drops one category from each feature that is passed through to make sure collinearity doesn't occur (several datasets showing the same information). This works in a series of binary columns because when you drop one of them, that instance or "event" becomes implicitly true when for that row, all the other columns are set to "False" or "0". As a preventative measure, I also set `handle_unknown="ignore"`, which just transforms an unknown column to all zeros if the encoder doesn't know what it is given.
 
 This is what my categorical preprocessor looks like:
 
