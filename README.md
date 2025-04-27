@@ -111,7 +111,7 @@ Below is a histogram showing the distribution of power outages on a monthly basi
 
  <iframe
     src="assets/htmls/hist.html"
-    width"800"800"
+    width="800"
     height="600"
     frameborder="0"
     
@@ -125,7 +125,7 @@ Below is a choropleth map of the United States, visualizing the number of outage
 
  <iframe
  src="assets/htmls/map.html"
- width"800"800"
+ width="800"
  height="600"
  frameborder="0"
  ></iframe>
