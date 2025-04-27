@@ -188,7 +188,7 @@ This is what my numerical preprocessor looks like:
 
 <iframe
  src="assets/htmls/numerical_preprocessing.html"
- width"800"700"
+ width="800"
  height="150"
  frameborder="0"
  ></iframe>
